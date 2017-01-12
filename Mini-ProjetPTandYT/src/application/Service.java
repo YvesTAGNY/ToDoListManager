@@ -1,0 +1,33 @@
+package application;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+
+public class Service implements Runnable {
+
+	private Socket serverService;
+	
+	Service(Socket s){serverService = s;}
+
+	@Override
+	public void run() {
+		
+		try {
+			InputStream in = serverService.getInputStream();
+			OutputStream out = serverService.getOutputStream();
+			
+			BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+			
+			
+			serverService.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+}
