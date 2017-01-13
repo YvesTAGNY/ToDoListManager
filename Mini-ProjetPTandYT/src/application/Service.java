@@ -21,7 +21,8 @@ public class Service implements Runnable {
 			OutputStream out = serverService.getOutputStream();
 			
 			BufferedReader bin = new BufferedReader(new InputStreamReader(in));
-			
+			String msg = bin.readLine();
+			System.out.println("recu : " + msg);
 			
 			serverService.close();
 		} catch (IOException e) {
