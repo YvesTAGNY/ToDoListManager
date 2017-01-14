@@ -35,7 +35,7 @@ public class ControleurConnexion extends Pane{
 
     @FXML
     protected void doInscription(ActionEvent event) throws IOException {
-        System.out.println("Clique sur Inscription !" + getText());
+        System.out.println("doInscription : " + getText());
         setText("ex : Julle");
         //actions
         
@@ -60,7 +60,7 @@ public class ControleurConnexion extends Pane{
     
     @FXML
     protected void doConnexion(ActionEvent event) throws IOException {
-        System.out.println("Clique sur Connexion !" + getText());
+        System.out.println("doConnexion : " + getText());
         //actions
         
        
