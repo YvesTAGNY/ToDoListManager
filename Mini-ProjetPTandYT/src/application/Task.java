@@ -146,6 +146,18 @@ public class Task implements Serializable {
 		}
 		return object;
 	}
+	
+	public String toString(){
+		return ("Tâche : "+this.title+"\n"
+				+"Description : "+this.description+"\n"
+				+"Priorité : "+this.priority+"\n"
+				+"Réalisateur : "+this.taskMaker+"\n"
+				);
+		
+		
+		
+		
+	}
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
