@@ -2,7 +2,6 @@ package application;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,20 +22,19 @@ public class Task implements Serializable {
 	private String description;
 	private String priority;
 	private int state;
-	private Date endDate;
+	private String endDate;
 	private String taskCreator;
 	private String taskMaker;
-	
-	
 
 	/* getter and Setter */
 	public Task(){}
 
-	public Task(String title, String description, String priority, String taskMaker) {
+	public Task(String title, String description, String priority, String taskCreator, String taskMaker) {
 		// TODO Auto-generated constructor stub
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
+		this.taskCreator = taskCreator;
 		this.taskMaker = taskMaker;
 
 	}
@@ -73,11 +71,11 @@ public class Task implements Serializable {
 		this.state = state;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -107,72 +105,69 @@ public class Task implements Serializable {
 		return null;
 	}
 
-	private Void giveTask() {// attribuer une tache, besoin d'un nom en paramêtre
+	private Void giveTask() {
+		return null;
+	}
+
+	private Void takeTask() {
 		return null;
 	}
 	
-	public void takeTask(User u) {// s'attribuer une tâche, pas besoin de rentrer un nom en paramêtre
-		this.taskMaker= u.getUserName();
-		
+	public String toString(){
+		return "Tâche : " + getTitle() + " " + getDescription() + " " + getPriority() + " " + getState() + " " + getEndDate() + " " + getTaskCreator() + " " + getTaskMaker();
 	}
 	
-
-	public static void encodeToFile(Task t, String fileName) throws FileNotFoundException, IOException {
-		// ouverture de l'encodeur vers le fichier
+	static XMLEncoder xmle;
+	static XMLDecoder xmld;
+	static void initFilleXMLE(String fileName) throws IOException{
 		File f= new File(fileName);
 		f.createNewFile();
-	    final XMLEncoder xmle = new XMLEncoder(new FileOutputStream(f,false));
-		try {
-			// serialisation de l'objet
-			
-			xmle.writeObject(t);
-			xmle.flush();
-		} finally {
-			// fermeture de l'encodeur
-			xmle.close();
-		}
-	}
-
-	public static Object decodeFromFile(String fileName) throws FileNotFoundException, IOException {
-		Object object = null;
-		// ouverture de decodeur
-		XMLDecoder decoder = new XMLDecoder(new FileInputStream(fileName));
-		try {
-			// deserialisation de l'objet
-			object = (Task) decoder.readObject();
-		} finally {
-			// fermeture du decodeur
-			decoder.close();
-		}
-		return object;
+	    xmle = new XMLEncoder(new FileOutputStream(f,false));
 	}
 	
-	public String toString(){
-		return ("Tâche : "+this.title+"\n"
-				+"Description : "+this.description+"\n"
-				+"Priorité : "+this.priority+"\n"
-				+"Réalisateur : "+this.taskMaker+"\n"
-				);
-		
-		
-		
-		
+	static void CloseFilleXMLE() {
+		// fermeture de l'encodeur
+		xmle.close();
+	}
+	static void initFilleXMLD(String fileName) throws IOException{
+		File f= new File(fileName);
+		f.createNewFile();
+	    // ouverture de decodeur
+	    xmld = new XMLDecoder(new FileInputStream(fileName));
+	}
+	
+	static void CloseFilleXMLD() {
+		// fermeture du decodeur
+		xmld.close();
+	}
+
+	public static void encodeToFile(Task t) throws FileNotFoundException, IOException {
+		// serialisation de l'objet
+		xmle.writeObject(t);
+		xmle.flush();
+	}
+
+	public static Object decodeFromFile() throws FileNotFoundException, IOException {
+		Object object = null;
+		// deserialisation de l'objet
+		object = (Task) xmld.readObject();
+		return object;
 	}
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
 		
-		Task t = new Task("Balayer", "Balayer la cour, et jeter les feuilles", "IMPORTANT", "Pierre");
-		Task t1 = new Task("Astiquer", "Balayer la cour, et jeter les feuilles", "FORTE", "Alix");
-		Task t2 = new Task("Décharger", "Balayer la cour, et jeter les feuilles", "FAIBLE", "Yves");
+		Task t = new Task("Balayer", "Balayer la cour, et jeter les feuilles", "IMPORTANT","Alix", "Pierre");
+		Task t1 = new Task("Astiquer", "Balayer la cour, et jeter les feuilles", "FORTE","Alix", "Alix");
+		Task t2 = new Task("Décharger", "Balayer la cour, et jeter les feuilles", "FAIBLE","Alix", "Yves");
 		
-		
+		initFilleXMLE("./ressource/Task.xml");
 		
 		try {
-			encodeToFile(t, "./ressource/User.xml");
-			encodeToFile(t1, "./ressource/User.xml");
-			encodeToFile(t2, "./ressource/User.xml");
+			encodeToFile(t);
+			encodeToFile(t1);
+			encodeToFile(t2);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();		
@@ -180,6 +175,9 @@ public class Task implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		CloseFilleXMLE();
+		
 		System.out.println("une tache : " + t.getTitle());
 		System.out.println("une tache : " + t1.getTitle());
 		System.out.println("une tache : " + t2.getTitle());
