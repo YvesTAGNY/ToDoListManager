@@ -107,13 +107,15 @@ public class Task implements Serializable {
 		return null;
 	}
 
-	private Void giveTask() {
+	private Void giveTask() {// attribuer une tache, besoin d'un nom en paramêtre
 		return null;
 	}
-
-	private Void takeTask() {
-		return null;
+	
+	public void takeTask(User u) {// s'attribuer une tâche, pas besoin de rentrer un nom en paramêtre
+		this.taskMaker= u.getUserName();
+		
 	}
+	
 
 	public static void encodeToFile(Task t, String fileName) throws FileNotFoundException, IOException {
 		// ouverture de l'encodeur vers le fichier
