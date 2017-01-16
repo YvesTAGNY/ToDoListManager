@@ -65,8 +65,9 @@ public class Task {
 	private Void deleteTask(){
 		return null;}
 	
-	private Void giveTask(){
-		return null;}
+	private void giveTask(User user){
+		this.taskMaker = user;
+		}
 	
 	private Void takeTask(){
 		return null;}

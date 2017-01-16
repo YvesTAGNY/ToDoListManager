@@ -21,6 +21,12 @@ public class User extends Thread {
 		this.userName = userName;
 	}
 	
+	 @Override
+	public String toString(){
+		return "User ::"  +userName;
+		
+	}
+	
 	public static void encodeToFile(Object object, String fileName) throws FileNotFoundException, IOException {
 		// ouverture de l'encodeur vers le fichier
 		XMLEncoder encoder = new XMLEncoder(new FileOutputStream(fileName));
