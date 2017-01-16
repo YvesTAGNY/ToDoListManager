@@ -22,7 +22,7 @@ public class Task implements Serializable {
 	private String description;
 	private String priority;
 	private int state;
-	private String endDate;
+	private Date endDate;
 	private String taskCreator;
 	private String taskMaker;
 
@@ -71,11 +71,11 @@ public class Task implements Serializable {
 		this.state = state;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -97,20 +97,20 @@ public class Task implements Serializable {
 
 	/* Methods */
 
-	private Void closeTask() {
-		return null;
+	private void closeTask() {
+		
 	}
 
-	private Void deleteTask() {
-		return null;
+	private void deleteTask(Task t) {
+		Serveur.getTodoList().remove(t);
 	}
 
-	private Void giveTask() {
-		return null;
+	private void giveTask(User u) {
+		this.taskMaker = u.getUserName();
 	}
 
-	private Void takeTask() {
-		return null;
+	private void takeTask(User u) {
+		this.taskMaker = u.getUserName();
 	}
 	
 	public String toString(){

@@ -8,7 +8,16 @@ import java.util.ArrayList;
 public class Serveur {
 
 	private static ArrayList<Task> todoList = new ArrayList<Task>();
-	public static final int PORT = 5000;
+	
+	public static ArrayList<Task> getTodoList() {
+		return todoList;
+	}
+
+	public static void setTodoList(ArrayList<Task> todoList) {
+		Serveur.todoList = todoList;
+	}
+
+	public static final int PORT = 7171;
 	
 	public static void main(String[] args) throws IOException {
 		
