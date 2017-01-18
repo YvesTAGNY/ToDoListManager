@@ -3,11 +3,15 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 
-import javafx.beans.property.*;
+import application.Client;
+import application.StaxXMLUser;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -34,27 +38,38 @@ public class ControleurConnexion extends Pane{
 
     @FXML
     protected void doInscription(ActionEvent event) throws IOException {
-        System.out.println("doInscription : " + getText());
-        setText("ex : Julle");
+        //System.out.println("doInscription : " + getText());
+        //setText("ex : Julle");
         //actions
+        if(!StaxXMLUser.isExist(getText())){
         
-        
-        //fermeture de la fenetre de connection
-        Stage cStage = (Stage)connexion.getScene().getWindow();
-        cStage.close();  
-        
-        //ouverture de la fenetre Client
-        final URL url = getClass().getResource("/view/IHM_Client.fxml");
-        final FXMLLoader fxmlLoader = new FXMLLoader(url);
-        final Pane root = (Pane) fxmlLoader.load();
-        final Scene scene = new Scene(root);
-        final Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
-        stage.requestFocus();
-        //
-        Label un = (Label) root.getChildren().get(17);
-        un.setText(getText());
+        	//creation d'un nouveau client
+        	Client.client(getText());
+            
+	        //fermeture de la fenetre de connection
+	        Stage cStage = (Stage)connexion.getScene().getWindow();
+	        cStage.close();  
+	        
+	        //ouverture de la fenetre Client
+	        final URL url = getClass().getResource("/view/IHM_Client.fxml");
+	        final FXMLLoader fxmlLoader = new FXMLLoader(url);
+	        final Pane root = (Pane) fxmlLoader.load();
+	        final Scene scene = new Scene(root);
+	        final Stage stage = new Stage();
+	        stage.setScene(scene);
+	        stage.show();
+	        stage.requestFocus();
+	        //
+	        Label un = (Label) root.getChildren().get(17);
+	        un.setText(getText());
+        }
+        else{
+        	Alert dialogE = new Alert(AlertType.ERROR);
+        	dialogE.setTitle("Erreue");
+        	dialogE.setHeaderText("Utilisateur existant");
+        	dialogE.setContentText("Cette utilisateur est déja enrergistrer");
+        	dialogE.showAndWait();
+        }
     }
     
     @FXML

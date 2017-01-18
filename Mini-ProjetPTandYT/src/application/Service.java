@@ -25,8 +25,17 @@ public class Service implements Runnable {
 			String msg = bin.readLine();
 			System.out.println("recu : " + msg);
 			
-			 PrintStream pout = new PrintStream(out);
-		     pout.println("Combien ?");
+			//serialisation du nouveau utilisateur
+			User.initFilleXMLE("./ressource/User.xml");
+			
+            User user = new User();
+            user.setName(msg);
+            User.encodeToFile(user);
+            
+            User.CloseFilleXMLE();
+			
+			 /*PrintStream pout = new PrintStream(out);
+		     pout.println("Combien ?");*/
 			
 			serverService.close();
 		} catch (IOException e) {

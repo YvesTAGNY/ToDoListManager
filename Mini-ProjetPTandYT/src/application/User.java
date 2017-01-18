@@ -8,8 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User extends Thread {
+	
+	public static List<User> UserList;
 	
 	private String userName;
 	
@@ -25,41 +28,56 @@ public class User extends Thread {
 		return getUserName();
 	}
 	
+	
 	static XMLEncoder xmle;
 	static XMLDecoder xmld;
-	static void initFilleXMLE(String fileName) throws IOException{
+	
+	/*
+	 * */
+	public static void initFilleXMLE(String fileName) throws IOException{
 		File f= new File(fileName);
 		f.createNewFile();
 	    xmle = new XMLEncoder(new FileOutputStream(f,false));
+	  //initialisation avec les données qui exitaient
+	   /* initFilleXMLD(fileName);
+	    while(xmld.readObject() != null){
+	    	UserList.add(decodeFromFile());
+	    }
+	    CloseFilleXMLD();*/
 	}
 	
-	static void CloseFilleXMLE() {
+	public static void encodeToFile(User u) throws FileNotFoundException, IOException {
+		// serialisation de l'objet
+		xmle.writeObject(u);
+		xmle.flush();
+	}
+	
+	public static void CloseFilleXMLE() {
 		// fermeture de l'encodeur
 		xmle.close();
 	}
-	static void initFilleXMLD(String fileName) throws IOException{
+	
+
+	/*
+	 * */
+	
+	public static void initFilleXMLD(String fileName) throws IOException{
 		File f= new File(fileName);
 		f.createNewFile();
 	    // ouverture de decodeur
 	    xmld = new XMLDecoder(new FileInputStream(fileName));
 	}
 	
-	static void CloseFilleXMLD() {
-		// fermeture du decodeur
-		xmld.close();
-	}
-
-	public static void encodeToFile(User u) throws FileNotFoundException, IOException {
-		// serialisation de l'objet
-		xmle.writeObject(u);
-		xmle.flush();
-	}
-
-	public static Object decodeFromFile() throws FileNotFoundException, IOException {
+	public static User decodeFromFile() throws FileNotFoundException, IOException {
 		Object object = null;
 		// deserialisation de l'objet
-		object = (Task) xmld.readObject();
-		return object;
+		object = xmld.readObject();
+		return (User) object;
+	}
+	
+	public static void CloseFilleXMLD() {
+		// fermeture du decodeur
+		xmld.close();
 	}
 	
 	public static void main(String[] args) throws IOException {

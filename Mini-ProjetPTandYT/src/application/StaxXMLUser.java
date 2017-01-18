@@ -13,6 +13,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+
 public class StaxXMLUser {
 	public static void main(String[] args) {
 		String fileName = "./ressource/User.xml";
@@ -24,7 +25,7 @@ public class StaxXMLUser {
 
 
 
-	private static List<User> parseXML(String fileName) {
+	public static List<User> parseXML(String fileName) {
 		List<User> userlist = new ArrayList<>();
 		User user = null;
 		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
@@ -61,4 +62,16 @@ public class StaxXMLUser {
 	}
 	return userlist;
 }
+	public static boolean isExist(String nameUser){
+		
+		String fileName = "./ressource/User.xml";
+		List<User> UserList = parseXML(fileName);
+		for(User user : UserList){
+			if(user.getUserName().equals(nameUser)){
+				return true;
+			}
+			//System.out.println(user.toString());
+		}
+		return false;
+	}
 }

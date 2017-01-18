@@ -11,39 +11,73 @@ import java.net.UnknownHostException;
 
 public class Client {
 
-public static void main(String[] args) {
-
-    Socket clientSocket = null;
-    try {
-     clientSocket = new Socket("localhost", 7171);
-     
-    } catch (UnknownHostException e) {
-      System.err.println("Don't know about host");
-    } catch (IOException e) {
-      System.err.println("Couldn't get I/O for the connection to host");
-    }
-
-   
-    if (clientSocket != null) {
-      try {
-
-    	InputStream in = clientSocket.getInputStream();
-		OutputStream out = clientSocket.getOutputStream();
-        System.out.println("The client started.");
-        
-        PrintStream pout = new PrintStream(out);
-        pout.println("des bonbons");
-
-        BufferedReader bin = new BufferedReader(new InputStreamReader(in));
-		String msg = bin.readLine();
-		System.out.println("recu : " + msg);
-		
-        clientSocket.close();
-      } catch (UnknownHostException e) {
-        System.err.println("Trying to connect to unknown host: " + e);
-      } catch (IOException e) {
-        System.err.println("IOException:  " + e);
-      }
-    }
-  }
+	public static void client(String userName){
+	    Socket clientSocket = null;
+	    try {
+	     clientSocket = new Socket("localhost", 7171);
+	     
+	    } catch (UnknownHostException e) {
+	      System.err.println("Don't know about host");
+	    } catch (IOException e) {
+	      System.err.println("Couldn't get I/O for the connection to host");
+	    }
+	
+	   
+	    if (clientSocket != null) {
+	      try {
+	
+	    	InputStream in = clientSocket.getInputStream();
+			OutputStream out = clientSocket.getOutputStream();
+	        System.out.println("The client started.");
+	        
+	        PrintStream pout = new PrintStream(out);
+	        pout.println(userName);
+	
+	       /* BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+			String msg = bin.readLine();
+			System.out.println("recu : " + msg);*/
+			
+	        clientSocket.close();
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	}
+	public static void main(String[] args) {
+	
+	    Socket clientSocket = null;
+	    try {
+	     clientSocket = new Socket("localhost", 7171);
+	     
+	    } catch (UnknownHostException e) {
+	      System.err.println("Don't know about host");
+	    } catch (IOException e) {
+	      System.err.println("Couldn't get I/O for the connection to host");
+	    }
+	
+	   
+	    if (clientSocket != null) {
+	      try {
+	
+	    	InputStream in = clientSocket.getInputStream();
+			OutputStream out = clientSocket.getOutputStream();
+	        System.out.println("The client started.");
+	        
+	        PrintStream pout = new PrintStream(out);
+	        pout.println("des bonbons");
+	
+	        BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+			String msg = bin.readLine();
+			System.out.println("recu : " + msg);
+			
+	        clientSocket.close();
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	  }
 }
