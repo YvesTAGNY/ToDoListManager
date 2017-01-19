@@ -28,7 +28,7 @@
       <Label layoutX="12.0" layoutY="191.0" text="Description" />
       <Label layoutX="12.0" layoutY="236.0" text="Priorité" />
       <Label layoutX="13.0" layoutY="280.0" text="Etat" />
-      <Label layoutX="16.0" layoutY="16.0" text="Nom" textFill="#343436">
+      <Label fx:id="un" layoutX="16.0" layoutY="16.0" text="Nom" textFill="#343436">
          <font>
             <Font size="18.0" />
          </font>

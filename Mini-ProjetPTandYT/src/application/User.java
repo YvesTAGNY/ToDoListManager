@@ -98,11 +98,15 @@ public class User extends Thread {
 		/*
 		initFilleXMLD("./ressource/User.xml");
 		try {
-			User user3 = (User) decodeFromFile();
-			System.out.println("name : " + user3.getName());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			    while(true){
+					User user = (User) decodeFromFile();
+					if(user == null)break;
+					UserList.add(user);
+					System.out.println("name : " + user.getName());
+				}
+		    } catch (IOException e){
+		    	
+		    }
 		
 		CloseFilleXMLD();*/
 	}

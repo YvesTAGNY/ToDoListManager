@@ -44,7 +44,10 @@ public class ControleurConnexion extends Pane{
         if(!StaxXMLUser.isExist(getText())){
         
         	//creation d'un nouveau client
-        	Client.client(getText());
+        	Client client = new Client();
+        	client.openClient();
+        	client.clientSendUserName(getText());
+        	ControleurClient.client = client;
             
 	        //fermeture de la fenetre de connection
 	        Stage cStage = (Stage)connexion.getScene().getWindow();

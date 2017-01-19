@@ -29,16 +29,25 @@ public class Task implements Serializable {
 	/* getter and Setter */
 	public Task(){}
 
-	public Task(String title, String description, String priority, String taskCreator, String taskMaker) {
+	public Task(String title, String description, String priority, int state ,  String taskCreator, String taskMaker) {
 		// TODO Auto-generated constructor stub
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
+		this.state = state;
 		this.taskCreator = taskCreator;
 		this.taskMaker = taskMaker;
 
 	}
-
+	
+	public String etatToString(){
+		switch (this.state){
+			case 0 : return "INIT";
+			case 1 : return "EN COURS";
+			case 2 : return "TERMINER";
+		}
+		return null;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -158,9 +167,9 @@ public class Task implements Serializable {
 		// TODO Auto-generated method stub
 		
 		
-		Task t = new Task("Balayer", "Balayer la cour, et jeter les feuilles", "IMPORTANT","Alix", "Pierre");
-		Task t1 = new Task("Astiquer", "Balayer la cour, et jeter les feuilles", "FORTE","Alix", "Alix");
-		Task t2 = new Task("Décharger", "Balayer la cour, et jeter les feuilles", "FAIBLE","Alix", "Yves");
+		Task t = new Task("Balayer", "Balayer la cour, et jeter les feuilles", "IMPORTANT",1,"Alix", "Pierre");
+		Task t1 = new Task("Astiquer", "Balayer la cour, et jeter les feuilles", "FORTE",0,"Alix", "Alix");
+		Task t2 = new Task("Décharger", "Balayer la cour, et jeter les feuilles", "FAIBLE",2,"Alix", "Yves");
 		
 		initFilleXMLE("./ressource/Task.xml");
 		

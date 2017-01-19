@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Client;
+import application.Task;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,6 +18,11 @@ import javafx.scene.control.TextField;
 
 public class ControleurClient implements Initializable {
 
+	public static Client client;
+	//ControleurClient(Client client){ this.client = client; }
+	
+	@FXML private Label un;
+	
 	@FXML private TextField titre;
 	@FXML private TextField description;
 	@FXML private TextField priorite;
@@ -70,6 +77,9 @@ public class ControleurClient implements Initializable {
 	@FXML
 	protected void doAjouter(ActionEvent event) throws IOException {
 		 System.out.println("doAjouter");
+		 
+		 Task t = new Task(titre.getText(),description.getText(),priorite.getText(),Integer.parseInt(etat.getText()), un.getText(),un.getText());
+		 client.clientSendUserName("fg");
 	}
 	
 	@FXML

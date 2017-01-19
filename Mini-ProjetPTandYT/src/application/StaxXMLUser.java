@@ -15,15 +15,6 @@ import javax.xml.stream.events.XMLEvent;
 
 
 public class StaxXMLUser {
-	public static void main(String[] args) {
-		String fileName = "./ressource/User.xml";
-		List<User> UserList = parseXML(fileName);
-		for(User user : UserList){
-			System.out.println(user.toString());
-		}
-	}
-
-
 
 	public static List<User> parseXML(String fileName) {
 		List<User> userlist = new ArrayList<>();
