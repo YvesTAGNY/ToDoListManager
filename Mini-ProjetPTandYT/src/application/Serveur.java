@@ -5,8 +5,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Serveur {
+import controller.ControleurClient;
 
+public class Serveur {
+	
 	private static ArrayList<Task> todoList = new ArrayList<Task>();
 	
 	public static ArrayList<Task> getTodoList() {

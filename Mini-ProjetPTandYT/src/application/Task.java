@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 
+import controller.ControleurClient;
+
 
 public class Task implements Serializable {
 
@@ -128,16 +130,16 @@ public class Task implements Serializable {
 	
 	static XMLEncoder xmle;
 	static XMLDecoder xmld;
+	
+	
+	
 	static void initFilleXMLE(String fileName) throws IOException{
 		File f= new File(fileName);
 		f.createNewFile();
 	    xmle = new XMLEncoder(new FileOutputStream(f,false));
 	}
 	
-	static void CloseFilleXMLE() {
-		// fermeture de l'encodeur
-		xmle.close();
-	}
+	
 	static void initFilleXMLD(String fileName) throws IOException{
 		File f= new File(fileName);
 		f.createNewFile();
@@ -145,15 +147,15 @@ public class Task implements Serializable {
 	    xmld = new XMLDecoder(new FileInputStream(fileName));
 	}
 	
-	static void CloseFilleXMLD() {
-		// fermeture du decodeur
-		xmld.close();
-	}
-
 	public static void encodeToFile(Task t) throws FileNotFoundException, IOException {
 		// serialisation de l'objet
 		xmle.writeObject(t);
 		xmle.flush();
+	}
+	
+	static void CloseFilleXMLE() {
+		// fermeture de l'encodeur
+		xmle.close();
 	}
 
 	public static Object decodeFromFile() throws FileNotFoundException, IOException {
@@ -163,6 +165,11 @@ public class Task implements Serializable {
 		return object;
 	}
 
+	static void CloseFilleXMLD() {
+		// fermeture du decodeur
+		xmld.close();
+	}
+	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		

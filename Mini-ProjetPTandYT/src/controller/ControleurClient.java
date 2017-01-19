@@ -2,9 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Client;
+import application.Serveur;
 import application.Task;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,7 +21,6 @@ import javafx.scene.control.TextField;
 public class ControleurClient implements Initializable {
 
 	public static Client client;
-	//ControleurClient(Client client){ this.client = client; }
 	
 	@FXML private Label un;
 	
@@ -48,7 +49,7 @@ public class ControleurClient implements Initializable {
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 	    
 	    //test
-	    listeTaches.getItems().setAll("ecrire", "manger", "nourrire");
+	   // listeTaches.getItems().setAll("ecrire", "manger", "nourrire");
 
 	    // pour la label du combobox
 	    //--->selectedFruit.textProperty().bind(listeTaches.getSelectionModel().selectedItemProperty());
@@ -79,7 +80,9 @@ public class ControleurClient implements Initializable {
 		 System.out.println("doAjouter");
 		 
 		 Task t = new Task(titre.getText(),description.getText(),priorite.getText(),Integer.parseInt(etat.getText()), un.getText(),un.getText());
-		 client.clientSendUserName("fg");
+		 
+		 listeTaches.getItems().add(t.getTitle());
+		 client.clientSendTask(t);
 	}
 	
 	@FXML

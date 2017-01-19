@@ -1,9 +1,11 @@
 package application;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -34,8 +36,16 @@ public class Service implements Runnable {
 	            
 	            User.CloseFilleXMLE();
 
-	            while(true){ Thread.sleep(1000);msg = bin.readLine();
-				System.out.println("recu : " + msg);}
+	            
+	            while(true){ 
+		            ObjectInputStream Oint = new ObjectInputStream(in);
+		            Task t = (Task) Oint.readObject();
+					System.out.println("recu : " + t.toString());
+					
+					Task.initFilleXMLE("./ressource/Task.xml");
+					Task.encodeToFile(t);
+					Task.CloseFilleXMLE();
+				}
 	         
 	           //bin.close();
 	            
@@ -49,7 +59,7 @@ public class Service implements Runnable {
 	            
 				//System.out.println("Serveur arrête");
 				//serverService.close();
-			} catch (IOException | InterruptedException e) {
+			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

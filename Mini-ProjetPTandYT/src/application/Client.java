@@ -33,7 +33,7 @@ private Socket clientSocket = null;
 	        
 	        PrintStream pout = new PrintStream(out);
 	        pout.println(userName);
-	        pout.close();
+	        //pout.close();
 	       /* BufferedReader bin = new BufferedReader(new InputStreamReader(in));
 			String msg = bin.readLine();
 			System.out.println("recu : " + msg);*/
@@ -52,7 +52,7 @@ private Socket clientSocket = null;
 		ObjectOutputStream Oout = new ObjectOutputStream(out);
        // PrintStream pout = new PrintStream(out);
         Oout.writeObject(t);
-        Oout.close();
+        //Oout.close();
 	}
 	
 	public void closeClient(){

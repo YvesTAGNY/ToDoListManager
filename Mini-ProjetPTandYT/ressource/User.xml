@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_92" class="java.beans.XMLDecoder">
+<java version="1.8.0_91" class="java.beans.XMLDecoder">
  <object class="application.User">
   <void property="name">
-   <string>Pierre</string>
+   <string>sdf</string>
   </void>
  </object>
 </java>
