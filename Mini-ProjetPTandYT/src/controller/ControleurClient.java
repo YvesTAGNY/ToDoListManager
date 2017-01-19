@@ -22,6 +22,16 @@ public class ControleurClient implements Initializable {
 
 	public static Client client;
 	
+	private static ArrayList<Task> todoList = new ArrayList<Task>();
+	
+	public static ArrayList<Task> getTodoList() {
+		return todoList;
+	}
+
+	public static void setTodoList(ArrayList<Task> todoList) {
+		ControleurClient.todoList = todoList;
+	}
+	
 	@FXML private Label un;
 	
 	@FXML private TextField titre;
@@ -48,28 +58,21 @@ public class ControleurClient implements Initializable {
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 	    
-	    //test
-	   // listeTaches.getItems().setAll("ecrire", "manger", "nourrire");
-
-	    // pour la label du combobox
-	    //--->selectedFruit.textProperty().bind(listeTaches.getSelectionModel().selectedItemProperty());
-
 	    // listen for changes to the task combo box selection and update the displayed taskSystem.out.printlny.
 	    listeTaches.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		    @Override public void changed(ObservableValue<? extends String> selected, String oldV, String newV) {
-		    	/*if (oldV != null) {
-			        switch(oldV) {
-			            case "ecrire": System.out.println("1"); break;
-			            case "manger": System.out.println("2"); break;
-			            case "nourrire": System.out.println("3"); break;
-			        }
-			    }*/
+		    	
 			    if (newV != null) {
-			        switch(newV) {
-			        	case "ecrire": titrel.setText(newV); System.out.println("1"); break;
-			            case "manger": titrel.setText(newV); System.out.println("2"); break;
-			            case "nourrire": titrel.setText(newV); System.out.println("3"); break;
-			        }
+			    	for(Task tl : todoList){
+			    		if(tl.getTitle().equals(newV)){
+			    			titrel.setText(newV);
+			    			descriptionl.setText(tl.getDescription());
+			    			prioritel.setText(tl.getPriority());
+			    			etatl.setText(tl.etatToString());
+			    			nameUU.setText(tl.getTaskMaker());
+			    			nameUC.setText(tl.getTaskCreator());
+			    		}
+			    	}
 			   }
 			}
 	   });
@@ -80,9 +83,10 @@ public class ControleurClient implements Initializable {
 		 System.out.println("doAjouter");
 		 
 		 Task t = new Task(titre.getText(),description.getText(),priorite.getText(),Integer.parseInt(etat.getText()), un.getText(),un.getText());
-		 
+		 todoList.add(t);
 		 listeTaches.getItems().add(t.getTitle());
 		 client.clientSendTask(t);
+		 
 	}
 	
 	@FXML

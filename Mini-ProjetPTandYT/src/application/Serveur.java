@@ -8,16 +8,6 @@ import java.util.ArrayList;
 import controller.ControleurClient;
 
 public class Serveur {
-	
-	private static ArrayList<Task> todoList = new ArrayList<Task>();
-	
-	public static ArrayList<Task> getTodoList() {
-		return todoList;
-	}
-
-	public static void setTodoList(ArrayList<Task> todoList) {
-		Serveur.todoList = todoList;
-	}
 
 	public static final int PORT = 7171;
 	

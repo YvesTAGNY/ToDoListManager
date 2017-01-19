@@ -36,17 +36,17 @@ public class Service implements Runnable {
 	            
 	            User.CloseFilleXMLE();
 
-	            
+	            Task.initFilleXMLE("./ressource/Task.xml");
 	            while(true){ 
 		            ObjectInputStream Oint = new ObjectInputStream(in);
 		            Task t = (Task) Oint.readObject();
 					System.out.println("recu : " + t.toString());
 					
-					Task.initFilleXMLE("./ressource/Task.xml");
+					
 					Task.encodeToFile(t);
-					Task.CloseFilleXMLE();
+					
 				}
-	         
+	           // Task.CloseFilleXMLE();
 	           //bin.close();
 	            
 	            /*

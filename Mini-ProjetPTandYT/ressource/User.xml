@@ -2,7 +2,7 @@
 <java version="1.8.0_91" class="java.beans.XMLDecoder">
  <object class="application.User">
   <void property="name">
-   <string>sdf</string>
+   <string>sfs</string>
   </void>
  </object>
 </java>

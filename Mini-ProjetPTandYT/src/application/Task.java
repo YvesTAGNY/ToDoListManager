@@ -113,7 +113,7 @@ public class Task implements Serializable {
 	}
 
 	private void deleteTask(Task t) {
-		Serveur.getTodoList().remove(t);
+		ControleurClient.getTodoList().remove(t);
 	}
 
 	private void giveTask(User u) {
@@ -131,20 +131,10 @@ public class Task implements Serializable {
 	static XMLEncoder xmle;
 	static XMLDecoder xmld;
 	
-	
-	
 	static void initFilleXMLE(String fileName) throws IOException{
 		File f= new File(fileName);
 		f.createNewFile();
 	    xmle = new XMLEncoder(new FileOutputStream(f,false));
-	}
-	
-	
-	static void initFilleXMLD(String fileName) throws IOException{
-		File f= new File(fileName);
-		f.createNewFile();
-	    // ouverture de decodeur
-	    xmld = new XMLDecoder(new FileInputStream(fileName));
 	}
 	
 	public static void encodeToFile(Task t) throws FileNotFoundException, IOException {
@@ -157,7 +147,17 @@ public class Task implements Serializable {
 		// fermeture de l'encodeur
 		xmle.close();
 	}
-
+	
+	/*
+	 * */
+	
+	static void initFilleXMLD(String fileName) throws IOException{
+		File f= new File(fileName);
+		f.createNewFile();
+	    // ouverture de decodeur
+	    xmld = new XMLDecoder(new FileInputStream(fileName));
+	}
+	
 	public static Object decodeFromFile() throws FileNotFoundException, IOException {
 		Object object = null;
 		// deserialisation de l'objet
@@ -174,7 +174,7 @@ public class Task implements Serializable {
 		// TODO Auto-generated method stub
 		
 		
-		Task t = new Task("Balayer", "Balayer la cour, et jeter les feuilles", "IMPORTANT",1,"Alix", "Pierre");
+		Task t = new Task("Balayercc", "Balayer la cour, et jeter les feuilles", "IMPORTANT",1,"Alix", "Pierre");
 		Task t1 = new Task("Astiquer", "Balayer la cour, et jeter les feuilles", "FORTE",0,"Alix", "Alix");
 		Task t2 = new Task("Décharger", "Balayer la cour, et jeter les feuilles", "FAIBLE",2,"Alix", "Yves");
 		

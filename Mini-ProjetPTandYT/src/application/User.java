@@ -12,7 +12,7 @@ import java.util.List;
 
 public class User extends Thread {
 	
-	public static List<User> UserList;
+	public static List<User> UserList = new ArrayList();
 	
 	private String userName;
 	
@@ -95,19 +95,15 @@ public class User extends Thread {
             e.printStackTrace();
         }
 		CloseFilleXMLE();
-		/*
+		
 		initFilleXMLD("./ressource/User.xml");
-		try {
-			    while(true){
-					User user = (User) decodeFromFile();
-					if(user == null)break;
+			User user;
+			    while((user = (User) xmld.readObject()) != null){
+					 
+					if(user != null)
 					UserList.add(user);
 					System.out.println("name : " + user.getName());
 				}
-		    } catch (IOException e){
-		    	
-		    }
-		
-		CloseFilleXMLD();*/
+		CloseFilleXMLD();
 	}
 }

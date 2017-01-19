@@ -1,54 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_92" class="java.beans.XMLDecoder">
+<java version="1.8.0_91" class="java.beans.XMLDecoder">
  <object class="application.Task">
   <void property="description">
-   <string>Balayer la cour, et jeter les feuilles</string>
+   <string>d</string>
   </void>
   <void property="priority">
-   <string>IMPORTANT</string>
+   <string>s</string>
   </void>
   <void property="taskCreator">
-   <string>Alix</string>
+   <string>sfs</string>
   </void>
   <void property="taskMaker">
-   <string>Pierre</string>
+   <string>sfs</string>
   </void>
   <void property="title">
-   <string>Balayer</string>
+   <string>qd</string>
   </void>
  </object>
  <object class="application.Task">
   <void property="description">
-   <string>Balayer la cour, et jeter les feuilles</string>
+   <string>d</string>
   </void>
   <void property="priority">
-   <string>FORTE</string>
+   <string>s</string>
   </void>
   <void property="taskCreator">
-   <string>Alix</string>
+   <string>sfs</string>
   </void>
   <void property="taskMaker">
-   <string>Alix</string>
+   <string>sfs</string>
   </void>
   <void property="title">
-   <string>Astiquer</string>
+   <string>q</string>
   </void>
  </object>
- <object class="application.Task">
-  <void property="description">
-   <string>Balayer la cour, et jeter les feuilles</string>
-  </void>
-  <void property="priority">
-   <string>FAIBLE</string>
-  </void>
-  <void property="taskCreator">
-   <string>Alix</string>
-  </void>
-  <void property="taskMaker">
-   <string>Yves</string>
-  </void>
-  <void property="title">
-   <string>Décharger</string>
-  </void>
- </object>
-</java>
