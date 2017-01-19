@@ -158,11 +158,11 @@ public class Task implements Serializable {
 	    xmld = new XMLDecoder(new FileInputStream(fileName));
 	}
 	
-	public static Object decodeFromFile() throws FileNotFoundException, IOException {
+	public static Task decodeFromFile() throws FileNotFoundException, IOException {
 		Object object = null;
 		// deserialisation de l'objet
 		object = (Task) xmld.readObject();
-		return object;
+		return (Task) object;
 	}
 
 	static void CloseFilleXMLD() {
@@ -197,9 +197,17 @@ public class Task implements Serializable {
 		System.out.println("une tache : " + t.getTitle());
 		System.out.println("une tache : " + t1.getTitle());
 		System.out.println("une tache : " + t2.getTitle());
-	
-		
-		
 
+		Task.initFilleXMLD("./ressource/User.xml");
+		Task task;
+		try{
+			while((task = Task.decodeFromFile()) != null){	 
+				System.out.println("une tache d : " + task.getTitle());
+			}
+		}catch(Exception e) {
+			System.out.println("fin");
+			CloseFilleXMLD();
+			e.printStackTrace();
+		}
 	}
 }

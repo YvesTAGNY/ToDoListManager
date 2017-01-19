@@ -35,15 +35,20 @@ public class User extends Thread {
 	/*
 	 * */
 	public static void initFilleXMLE(String fileName) throws IOException{
+		initFilleXMLD("./ressource/User.xml");
+		User user;
+		try{
+			while((user = decodeFromFile()) != null){	 
+				UserList.add(user);
+				System.out.println("name : " + user.getName());
+			}
+		}catch(Exception e) {
+			CloseFilleXMLD();
+		}
+		
 		File f= new File(fileName);
 		f.createNewFile();
 	    xmle = new XMLEncoder(new FileOutputStream(f,false));
-	  //initialisation avec les données qui exitaient
-	   /* initFilleXMLD(fileName);
-	    while(xmld.readObject() != null){
-	    	UserList.add(decodeFromFile());
-	    }
-	    CloseFilleXMLD();*/
 	}
 	
 	public static void encodeToFile(User u) throws FileNotFoundException, IOException {
@@ -98,12 +103,16 @@ public class User extends Thread {
 		
 		initFilleXMLD("./ressource/User.xml");
 			User user;
-			    while((user = (User) xmld.readObject()) != null){
+	try{
+			  while((user = decodeFromFile()) != null){
 					 
-					if(user != null)
+				if(user != null)
 					UserList.add(user);
 					System.out.println("name : " + user.getName());
 				}
+	} catch(Exception e) {
 		CloseFilleXMLD();
+    }
+		
 	}
 }

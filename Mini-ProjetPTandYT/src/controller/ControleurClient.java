@@ -57,7 +57,7 @@ public class ControleurClient implements Initializable {
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-	    
+		
 	    // listen for changes to the task combo box selection and update the displayed taskSystem.out.printlny.
 	    listeTaches.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		    @Override public void changed(ObservableValue<? extends String> selected, String oldV, String newV) {

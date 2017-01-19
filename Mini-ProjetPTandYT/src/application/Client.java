@@ -4,11 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class Client {
 
@@ -46,13 +48,52 @@ private Socket clientSocket = null;
 	}
 	
 	// objet envoyer par  le client au serveur
-	public void clientSendTask(Task t) throws IOException{
-		
-		OutputStream out = clientSocket.getOutputStream();
-		ObjectOutputStream Oout = new ObjectOutputStream(out);
-       // PrintStream pout = new PrintStream(out);
-        Oout.writeObject(t);
-        //Oout.close();
+	public void clientSendTask(Task t){
+        try {
+        	OutputStream out = clientSocket.getOutputStream();
+    		ObjectOutputStream Oout = new ObjectOutputStream(out);
+			Oout.writeObject(t);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<Task> clientRecieveListTask(){
+		 try {
+			 InputStream in = clientSocket.getInputStream();
+			 ArrayList<Task> lt = null;
+			 System.out.println("client dsd: ");
+		 	while(true){ 
+	            ObjectInputStream Oint = new ObjectInputStream(in);
+				lt = ( ArrayList<Task>) Oint.readObject();
+	            if(lt != null) break;
+				System.out.println("client : " + lt.toString());
+       	 	}
+       	 	return lt;
+		 } catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void clientSendOLD(){
+		  
+	    if (clientSocket != null) {
+	      try {
+			OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println("OLD");
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
 	}
 	
 	public void closeClient(){
@@ -63,4 +104,5 @@ private Socket clientSocket = null;
 			e.printStackTrace();
 		}
 	}
+	
 }

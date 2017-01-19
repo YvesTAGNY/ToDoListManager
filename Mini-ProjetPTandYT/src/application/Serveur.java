@@ -15,6 +15,7 @@ public class Serveur {
 		
 		ServerSocket socketServeur = new ServerSocket(PORT);
 		do{
+			 System.out.println("Serveur en attente de connexion ...");
 			Socket socketClient = socketServeur.accept();
 			Thread t = new Thread(new Service(socketClient)) ;
 			t.start();
