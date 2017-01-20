@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class Service implements Runnable {
 				InputStream in = serverService.getInputStream();
 				OutputStream out = serverService.getOutputStream();
 				
+				
 				/*ObjectOutputStream Oout = new ObjectOutputStream(out);
 				Task.initFilleXMLD("./ressource/User.xml");
 				Task task;
@@ -42,10 +44,32 @@ public class Service implements Runnable {
 		        Oout.writeObject(todoList);*/
 		        
 				BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+				PrintStream pout = new PrintStream(out);
 				String msg = bin.readLine();
-				if(!msg.equals("OLD")){
+				String accord = "NO";
+				
+				do{
 					System.out.println("recu : " + msg);
 					
+					//verification de l'existance du client dans les données
+					if(msg != null){
+						if(!StaxXMLUser.isExist(msg)){
+						    pout.println("YES");
+						    break;
+						}else{
+							pout.println("NO");
+						}
+					}
+					msg = bin.readLine();
+					
+					if(msg.equals("OLD"))
+						break;
+					
+				}while(accord.equals("NO"));
+				
+				msg = bin.readLine();
+				System.out.println("recu- : " + msg);
+				if(!msg.equals("OLD")){	
 					//serialisation du nouveau utilisateur
 					User.initFilleXMLE("./ressource/User.xml");
 					

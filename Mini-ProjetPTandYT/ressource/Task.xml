@@ -2,22 +2,59 @@
 <java version="1.8.0_91" class="java.beans.XMLDecoder">
  <object class="application.Task">
   <void property="description">
-   <string>s</string>
+   <string>a</string>
   </void>
   <void property="priority">
-   <string>s</string>
+   <string>a</string>
+  </void>
+  <void property="state">
+   <int>1</int>
+  </void>
+  <void property="taskCreator">
+   <string>a1</string>
+  </void>
+  <void property="taskMaker">
+   <string>a1</string>
+  </void>
+  <void property="title">
+   <string>a</string>
+  </void>
+ </object>
+ <object class="application.Task">
+  <void property="description">
+   <string>d</string>
+  </void>
+  <void property="priority">
+   <string>ad</string>
   </void>
   <void property="state">
    <int>2</int>
   </void>
   <void property="taskCreator">
-   <string>5</string>
+   <string>a1</string>
   </void>
   <void property="taskMaker">
-   <string>5</string>
+   <string>a1</string>
   </void>
   <void property="title">
    <string>d</string>
+  </void>
+ </object>
+ <object class="application.Task">
+  <void property="description">
+   <string>df</string>
+  </void>
+  <void property="priority">
+   <string>f</string>
+  </void>
+  <void property="taskCreator">
+   <string>a1</string>
+  </void>
+  <void property="taskMaker">
+   <string>a1</string>
+  </void>
+  <void property="title">
+   <string>f</string>
   </void>
  </object>
 </java>

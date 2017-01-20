@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 
 public class ControleurConnexion extends Pane{
 	
+	static boolean run = false;
+	
 	@FXML private TextField nameUser;
 	@FXML private Button inscription;
 	@FXML private Button connexion;
@@ -38,17 +40,25 @@ public class ControleurConnexion extends Pane{
 
     @FXML
     protected void doInscription(ActionEvent event) throws IOException {
-        
+    	
+    	if(!run){
+	    	//creation d'un nouveau client
+	    	Client client = new Client();
+	    	client.openClient();
+	    	ControleurClient.client = client;
+	    	run = true;
+    	}
+    	//ControleurClient.setTodoList(client.clientRecieveListTask());
+    	//envoi du nom du client pour la vérification
+    	ControleurClient.client.clientSendUserName(getText());
+    	String accord = ControleurClient.client.clientRecieveAccord();
+    	
         //actions
-        if(!StaxXMLUser.isExist(getText())){
-        
-        	//creation d'un nouveau client
-        	Client client = new Client();
-        	client.openClient();
-        	//ControleurClient.setTodoList(client.clientRecieveListTask());
-        	client.clientSendUserName(getText());
-        	ControleurClient.client = client;
+        if(accord.equals("YES")){
             
+        	//envoi du nom du client pour la sauvegarde
+        	ControleurClient.client.clientSendUserName(getText());
+        	
 	        //fermeture de la fenetre de connection
 	        Stage cStage = (Stage)connexion.getScene().getWindow();
 	        cStage.close();  
@@ -78,13 +88,25 @@ public class ControleurConnexion extends Pane{
     @FXML
     protected void doConnexion(ActionEvent event) throws IOException {
         System.out.println("doConnexion : " + getText());
-        //actions
-        if(StaxXMLUser.isExist(getText())){
+        if(!run){
         	//creation d'un nouveau client
         	Client client = new Client();
         	client.openClient();
-        	client.clientSendOLD();
         	ControleurClient.client = client;
+	    	run = true;
+        }
+        
+    	//ControleurClient.setTodoList(client.clientRecieveListTask());
+    	//envoi du nom du client pour la vérification
+        ControleurClient.client.clientSendUserName(getText());
+    	String accord = ControleurClient.client.clientRecieveAccord();
+    	
+        //actions
+        if(!accord.equals("YES")){
+        	
+        	//envoi de la notification pour designe une connection
+        	ControleurClient.client.clientSendOLD();
+        	ControleurClient.client.clientSendOLD();
         	
         	//fermeture de la fenetre de connection
             Stage cStage = (Stage)connexion.getScene().getWindow();

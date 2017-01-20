@@ -35,24 +35,4 @@
    <string>a1</string>
   </void>
  </object>
- <object class="application.User">
-  <void property="name">
-   <string>1</string>
-  </void>
- </object>
- <object class="application.User">
-  <void property="name">
-   <string>2</string>
-  </void>
- </object>
- <object class="application.User">
-  <void property="name">
-   <string>3</string>
-  </void>
- </object>
- <object class="application.User">
-  <void property="name">
-   <string>5</string>
-  </void>
- </object>
 </java>

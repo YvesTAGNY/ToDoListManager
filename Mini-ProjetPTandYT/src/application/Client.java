@@ -59,6 +59,20 @@ private Socket clientSocket = null;
 		}
 	}
 	
+	public String clientRecieveAccord(){
+		 try {
+			 InputStream in = clientSocket.getInputStream();
+			 BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+			 String msg = bin.readLine();
+			 System.out.println("recu : " + msg);
+      	 	return msg;
+		 } catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public ArrayList<Task> clientRecieveListTask(){
 		 try {
 			 InputStream in = clientSocket.getInputStream();
