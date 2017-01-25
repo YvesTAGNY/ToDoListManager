@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import application.Client;
 import application.Serveur;
 import application.Task;
+import application.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -21,6 +22,8 @@ import javafx.scene.control.TextField;
 public class ControleurClient implements Initializable {
 
 	public static Client client;
+	
+	public static Task tache; 
 	
 	private static ArrayList<Task> todoList = new ArrayList<Task>();
 	
@@ -71,6 +74,7 @@ public class ControleurClient implements Initializable {
 			    			etatl.setText(tl.etatToString());
 			    			nameUU.setText(tl.getTaskMaker());
 			    			nameUC.setText(tl.getTaskCreator());
+			    			tache = tl;
 			    		}
 			    	}
 			   }
@@ -85,6 +89,7 @@ public class ControleurClient implements Initializable {
 		 Task t = new Task(titre.getText(),description.getText(),priorite.getText(),Integer.parseInt(etat.getText()), un.getText(),un.getText());
 		 todoList.add(t);
 		 listeTaches.getItems().add(t.getTitle());
+		 client.clientSendAJOUTER();
 		 client.clientSendTask(t);
 		 
 	}
@@ -97,11 +102,16 @@ public class ControleurClient implements Initializable {
 	@FXML
 	protected void doPrendre(ActionEvent event) throws IOException {
 		System.out.println("doPrendre");
+		if (tache.getTaskMaker() != un.getText()){
+			tache.setTaskMaker(un.getText());
+		}
+		client.clientSendPRENDRE();
 	}
 	
 	@FXML
 	protected void doTerminer(ActionEvent event) throws IOException {
 		System.out.println("doTerminer");
+		client.clientSendTERMINER();
 	}
 	
 	@FXML

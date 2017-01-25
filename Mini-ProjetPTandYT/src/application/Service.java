@@ -87,19 +87,42 @@ public class Service implements Runnable {
 		            User.encodeToFile(user);
 		            
 		            User.CloseFilleXMLE();
-				}
-	            Task.initFilleXMLE("./ressource/Task.xml");
+				} 
+	           
 	           
 	            /*
 				 * gestion des fonctions de tache
 				 * */
+				Task.initFilleXMLE("./ressource/Task.xml");
 	            try{
 	            	 while(true){ 
-			            ObjectInputStream Oint = new ObjectInputStream(in);
-			            Task t = (Task) Oint.readObject();
-						System.out.println("recu : " + t.toString());
-						if(t != null)
-						Task.encodeToFile(t);
+	            		 
+						msg = bin.readLine();
+	            		 if(msg != null){
+		            		 switch(msg) {
+		            		 	case "AJOUTER" :{
+		            		 		ObjectInputStream Oint = new ObjectInputStream(in);
+		    			            Task t = (Task) Oint.readObject();
+		    						System.out.println("recu : " + t.toString());
+		    						if(t != null)
+		    						Task.encodeToFile(t);
+		            		 		break;	
+		            		 	}
+		            		 	case "ATTRIBUER" :{
+		            		 		break;	
+		            		 	}
+		            		 	case "PRENDRE" :{
+		            		 		break;	
+		            		 	}
+		            		 	case "TERMINER" :{
+		            		 		break;	
+		            		 	}
+		            		 	case "SUPPRIMER" :{
+		            		 		break;	
+		            		 	}
+	
+		            		 }
+	            	 	}
 	            	 }
 	            } finally{
 	            	Task.CloseFilleXMLE();

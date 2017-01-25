@@ -125,6 +125,80 @@ private Socket clientSocket = null;
 	    }
 	}
 	
+	public void clientSendAJOUTER(){
+		  
+	    if (clientSocket != null) {
+	      try {
+			OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println("AJOUTER");
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	}
+	
+	public void clientSendATTRIBUER(){
+		  
+	    if (clientSocket != null) {
+	      try {
+			OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println("ATTRIBUER");
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	}
+	
+	public void clientSendPRENDRE(){
+		  
+	    if (clientSocket != null) {
+	      try {
+			OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println("PRENDRE");
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	}
+	
+	public void clientSendTERMINER(){
+		  
+	    if (clientSocket != null) {
+	      try {
+			OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println("NEW");
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	}
+	
+	public void clientSendSUPPRIMER(){
+		  
+	    if (clientSocket != null) {
+	      try {
+			OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println("SUPPRIMER");
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	}
 	public void closeClient(){
 		try {
 			clientSocket.close();
