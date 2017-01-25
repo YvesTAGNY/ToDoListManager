@@ -35,4 +35,9 @@
    <string>fd</string>
   </void>
  </object>
+ <object class="application.User">
+  <void property="name">
+   <string>s</string>
+  </void>
+ </object>
 </java>

@@ -2,8 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 
 import application.Client;
+import application.ODI;
 import application.StaxXMLUser;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -49,6 +52,15 @@ public class ControleurConnexion extends Pane{
 	    	run = true;
     	}
     	
+		try {
+			ODI o = (ODI)Naming.lookup("//localhost/od");
+			String str = o.getTodolist();
+			System.out.println("list : " + str);
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
     	//envoi du nom du client pour la vérification
     	ControleurClient.client.clientSendNEW();
     	ControleurClient.client.clientSendUserName(getText());

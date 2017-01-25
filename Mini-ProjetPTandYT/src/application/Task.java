@@ -8,12 +8,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Date;
 
 import controller.ControleurClient;
 
 
-public class Task implements Serializable {
+public class Task extends UnicastRemoteObject implements ODI {
 
 	/**
 	 * 
@@ -28,10 +31,13 @@ public class Task implements Serializable {
 	private String taskCreator;
 	private String taskMaker;
 
+	private ArrayList<Task> todoList;
+	public Task tsk;
+	
 	/* getter and Setter */
-	public Task(){}
+	public Task()throws RemoteException {} 
 
-	public Task(String title, String description, String priority, int state ,  String taskCreator, String taskMaker) {
+	public Task(String title, String description, String priority, int state ,  String taskCreator, String taskMaker)throws RemoteException {
 		// TODO Auto-generated constructor stub
 		this.title = title;
 		this.description = description;
@@ -125,7 +131,7 @@ public class Task implements Serializable {
 	}
 	
 	public String toString(){
-		return "Tâche : " + getTitle() + " " + getDescription() + " " + getPriority() + " " + getState() + " " + getEndDate() + " " + getTaskCreator() + " " + getTaskMaker();
+		return "T:" + getTitle() + "/" + getDescription() + "/" + getPriority() + "/" + getState() + " " + getEndDate() + "/" + getTaskCreator() + "/" + getTaskMaker();
 	}
 	
 	static XMLEncoder xmle;
@@ -209,5 +215,15 @@ public class Task implements Serializable {
 			CloseFilleXMLD();
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public String getTodolist() throws RemoteException {
+		// TODO Auto-generated method stub
+		return todoList.toString();
+	}
+	
+	public void setTodolist( ArrayList<Task> tl){
+		todoList = tl;
 	}
 }
