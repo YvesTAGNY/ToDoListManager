@@ -32,7 +32,52 @@
  </object>
  <object class="application.User">
   <void property="name">
-   <string>a1</string>
+   <string>b</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>Roger</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>Rollan</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>Pierre</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>Alain</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>Alix</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>Yves</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>b</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>fsd</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>fds</string>
   </void>
  </object>
 </java>

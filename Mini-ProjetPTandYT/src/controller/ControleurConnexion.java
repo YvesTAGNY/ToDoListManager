@@ -48,17 +48,14 @@ public class ControleurConnexion extends Pane{
 	    	ControleurClient.client = client;
 	    	run = true;
     	}
-    	//ControleurClient.setTodoList(client.clientRecieveListTask());
+    	
     	//envoi du nom du client pour la vérification
+    	ControleurClient.client.clientSendNEW();
     	ControleurClient.client.clientSendUserName(getText());
     	String accord = ControleurClient.client.clientRecieveAccord();
     	
         //actions
         if(accord.equals("YES")){
-            
-        	//envoi du nom du client pour la sauvegarde
-        	ControleurClient.client.clientSendUserName(getText());
-        	
 	        //fermeture de la fenetre de connection
 	        Stage cStage = (Stage)connexion.getScene().getWindow();
 	        cStage.close();  
@@ -96,18 +93,13 @@ public class ControleurConnexion extends Pane{
 	    	run = true;
         }
         
-    	//ControleurClient.setTodoList(client.clientRecieveListTask());
     	//envoi du nom du client pour la vérification
+        ControleurClient.client.clientSendOLD();
         ControleurClient.client.clientSendUserName(getText());
     	String accord = ControleurClient.client.clientRecieveAccord();
     	
         //actions
         if(!accord.equals("YES")){
-        	
-        	//envoi de la notification pour designe une connection
-        	ControleurClient.client.clientSendOLD();
-        	ControleurClient.client.clientSendOLD();
-        	
         	//fermeture de la fenetre de connection
             Stage cStage = (Stage)connexion.getScene().getWindow();
             cStage.close();  
