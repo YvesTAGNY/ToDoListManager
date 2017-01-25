@@ -110,6 +110,21 @@ private Socket clientSocket = null;
 	    }
 	}
 	
+	public void clientSendNEW(){
+		  
+	    if (clientSocket != null) {
+	      try {
+			OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println("NEW");
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	}
+	
 	public void closeClient(){
 		try {
 			clientSocket.close();

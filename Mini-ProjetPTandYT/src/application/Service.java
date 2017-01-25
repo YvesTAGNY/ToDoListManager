@@ -25,51 +25,55 @@ public class Service implements Runnable {
 			try {
 				InputStream in = serverService.getInputStream();
 				OutputStream out = serverService.getOutputStream();
-				
-				
-				/*ObjectOutputStream Oout = new ObjectOutputStream(out);
-				Task.initFilleXMLD("./ressource/User.xml");
-				Task task;
-				try{
-					while((task = Task.decodeFromFile()) != null){	 
-						todoList.add(task);
-						System.out.println("name t : " + task.toString());
-					}
-				}catch(Exception e) {
-					System.out.println("lt :2 ");
-					Task.CloseFilleXMLD();
-					e.printStackTrace();
-				}
-				
-		        Oout.writeObject(todoList);*/
 		        
 				BufferedReader bin = new BufferedReader(new InputStreamReader(in));
 				PrintStream pout = new PrintStream(out);
-				String msg = bin.readLine();
-				String accord = "NO";
+				String msg;
+				int decision = 0;
 				
+				/*
+				 * gestion de l'inscription et de la connection
+				 * */
 				do{
+					msg = bin.readLine();
 					System.out.println("recu : " + msg);
-					
-					//verification de l'existance du client dans les données
-					if(msg != null){
-						if(!StaxXMLUser.isExist(msg)){
-						    pout.println("YES");
-						    break;
-						}else{
-							pout.println("NO");
+					switch(msg){
+						case "NEW" :{
+							msg = bin.readLine();
+							if(msg != null){
+								if(!StaxXMLUser.isExist(msg)){//verification de l'existance du client dans les données
+								    pout.println("YES");
+								    decision=1;
+								}else{
+									pout.println("NO");
+								}
+							}
+							break;
+						}
+						case "OLD" :{
+							msg = bin.readLine();
+							if(msg != null){
+								if(!StaxXMLUser.isExist(msg)){
+								    pout.println("YES");
+								}else{
+									pout.println("NO");
+									decision=2;
+								}
+							}
+							break;
 						}
 					}
-					msg = bin.readLine();
 					
-					if(msg.equals("OLD"))
+					if(decision == 1 || decision == 2)
 						break;
 					
-				}while(accord.equals("NO"));
+				}while(true);
 				
-				msg = bin.readLine();
-				System.out.println("recu- : " + msg);
-				if(!msg.equals("OLD")){	
+				/*
+				 * enregistrement du nouveau client dans le fichier XML
+				 * */
+				System.out.println("new client : " + msg);
+				if(decision == 1){	
 					//serialisation du nouveau utilisateur
 					User.initFilleXMLE("./ressource/User.xml");
 					
@@ -84,9 +88,11 @@ public class Service implements Runnable {
 		            
 		            User.CloseFilleXMLE();
 				}
-				
 	            Task.initFilleXMLE("./ressource/Task.xml");
 	           
+	            /*
+				 * gestion des fonctions de tache
+				 * */
 	            try{
 	            	 while(true){ 
 			            ObjectInputStream Oint = new ObjectInputStream(in);
@@ -99,6 +105,7 @@ public class Service implements Runnable {
 	            	Task.CloseFilleXMLE();
 	            	serverService.close();
 	            }
+	            
 			} catch (IOException | ClassNotFoundException e) {
 				System.out.println("client déconnecté");
 			}
