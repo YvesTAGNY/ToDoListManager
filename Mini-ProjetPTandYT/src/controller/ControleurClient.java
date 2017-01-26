@@ -22,6 +22,8 @@ import javafx.scene.control.TextField;
 
 public class ControleurClient implements Initializable {
 
+	public static boolean LTisEmty = true; 
+	
 	public static Client client;
 	
 	public static Task tache; 
@@ -63,17 +65,20 @@ public class ControleurClient implements Initializable {
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		try {
-			reconstitutionDesTache();
-			for(Task t : todoList)
-				 listeTaches.getItems().add(t.getTitle());
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(!LTisEmty){
+			try {
+				reconstitutionDesTache();
+				for(Task t : todoList)
+					 listeTaches.getItems().add(t.getTitle());
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 	    // listen for changes to the task combo box selection and update the displayed taskSystem.out.printlny.
 	    listeTaches.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		    @Override public void changed(ObservableValue<? extends String> selected, String oldV, String newV) {
@@ -142,5 +147,5 @@ public class ControleurClient implements Initializable {
                 todoList.add(t);
         }
 
-} 
+	} 
 }

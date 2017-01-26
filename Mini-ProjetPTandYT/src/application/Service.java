@@ -26,33 +26,7 @@ public class Service implements Runnable {
 		System.out.println("Serveur en marche");
 		ArrayList<Task> todoList = new ArrayList<Task>();
 
-		/*
-		 * Recupération des taches dans le fichier xml
-		 */
-		Task task = null;
-		try {
-			Task.initFilleXMLD("./ressource/Task.xml");
-
-			while ((task = Task.decodeFromFile()) != null) {
-				todoList.add(task);
-				System.out.println(" t : " + task.toString());
-			}
-		} catch (Exception e) {
-			System.out.println("fin de recupération des taches");
-			Task.CloseFilleXMLD();
-		}
 		
-		if(todoList != null){
-			task.setTodolist(todoList);
-	
-			try {
-				Registry a = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-				a.rebind("od", task);
-			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
 		
 		/*
 		 * Communication client seveur
@@ -66,6 +40,37 @@ public class Service implements Runnable {
 			String msg;
 			int decision = 0;
 
+			/*
+			 * Recupération des taches dans le fichier xml
+			 */
+			Task task = null;
+			try {
+				Task.initFilleXMLD("./ressource/Task.xml");
+
+				while ((task = Task.decodeFromFile()) != null) {
+					todoList.add(task);
+					System.out.println(" t : " + task.toString());
+				}
+			} catch (Exception e) {
+				System.out.println("fin de recupération des taches");
+				Task.CloseFilleXMLD();
+			}
+			
+			if(!todoList.isEmpty()){
+				pout.println("FULL");
+				task.setTodolist(todoList);
+		
+				try {
+					Registry a = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+					a.rebind("od", task);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else
+				pout.println("VOID");
+			
 			/*
 			 * gestion de l'inscription et de la connection
 			 */
@@ -136,26 +141,26 @@ public class Service implements Runnable {
 					msg = bin.readLine();
 					if (msg != null) {
 						switch (msg) {
-						case "AJOUTER": {
-							ObjectInputStream Oint = new ObjectInputStream(in);
-							Task t = (Task) Oint.readObject();
-							System.out.println("recu : " + t.toString());
-							if (t != null)
-								Task.encodeToFile(t);
-							break;
-						}
-						case "ATTRIBUER": {
-							break;
-						}
-						case "PRENDRE": {
-							break;
-						}
-						case "TERMINER": {
-							break;
-						}
-						case "SUPPRIMER": {
-							break;
-						}
+							case "AJOUTER": {
+								ObjectInputStream Oint = new ObjectInputStream(in);
+								Task t = (Task) Oint.readObject();
+								System.out.println("recu : " + t.toString());
+								if (t != null)
+									Task.encodeToFile(t);
+								break;
+							}
+							case "ATTRIBUER": {
+								break;
+							}
+							case "PRENDRE": {
+								break;
+							}
+							case "TERMINER": {
+								break;
+							}
+							case "SUPPRIMER": {
+								break;
+							}
 
 						}
 					}
