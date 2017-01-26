@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,7 +28,7 @@ public class Task extends UnicastRemoteObject implements ODI {
 	private String description;
 	private String priority;
 	private int state;
-	private Date endDate;
+	private String endDate;
 	private String taskCreator;
 	private String taskMaker;
 
@@ -88,11 +89,11 @@ public class Task extends UnicastRemoteObject implements ODI {
 		this.state = state;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -114,8 +115,14 @@ public class Task extends UnicastRemoteObject implements ODI {
 
 	/* Methods */
 
-	private void closeTask() {
-		
+	public void closeTask() {
+		Date aujourdhui = new Date();
+		DateFormat mediumDateFormat = DateFormat.getDateTimeInstance(
+		DateFormat.MEDIUM,DateFormat.MEDIUM);
+		endDate = mediumDateFormat.format(aujourdhui);
+		this.setEndDate(endDate);
+		System.out.println("Date de fin : " +endDate);
+		this.state = 2;
 	}
 
 	private void deleteTask(Task t) {

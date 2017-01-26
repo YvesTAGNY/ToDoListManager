@@ -112,6 +112,7 @@ public class ControleurClient implements Initializable {
 	protected void doTerminer(ActionEvent event) throws IOException {
 		System.out.println("doTerminer");
 		client.clientSendTERMINER();
+		tache.closeTask();
 	}
 	
 	@FXML
