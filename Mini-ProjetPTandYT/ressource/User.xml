@@ -2,16 +2,6 @@
 <java version="1.8.0_91" class="java.beans.XMLDecoder">
  <object class="application.User">
   <void property="name">
-   <string>Roger</string>
-  </void>
- </object>
- <object class="application.User">
-  <void property="name">
-   <string>Rollan</string>
-  </void>
- </object>
- <object class="application.User">
-  <void property="name">
    <string>Pierre</string>
   </void>
  </object>
@@ -32,12 +22,12 @@
  </object>
  <object class="application.User">
   <void property="name">
-   <string>fd</string>
+   <string>a</string>
   </void>
  </object>
  <object class="application.User">
   <void property="name">
-   <string>s</string>
+   <string>e</string>
   </void>
  </object>
 </java>

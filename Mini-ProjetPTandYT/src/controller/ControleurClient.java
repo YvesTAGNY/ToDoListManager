@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -24,6 +25,8 @@ public class ControleurClient implements Initializable {
 	public static Client client;
 	
 	public static Task tache; 
+
+	public static String listtache; 
 	
 	private static ArrayList<Task> todoList = new ArrayList<Task>();
 	
@@ -60,7 +63,17 @@ public class ControleurClient implements Initializable {
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		
+		try {
+			reconstitutionDesTache();
+			for(Task t : todoList)
+				 listeTaches.getItems().add(t.getTitle());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    // listen for changes to the task combo box selection and update the displayed taskSystem.out.printlny.
 	    listeTaches.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		    @Override public void changed(ObservableValue<? extends String> selected, String oldV, String newV) {
@@ -120,4 +133,14 @@ public class ControleurClient implements Initializable {
 		System.out.println("doSupprimer");
 	}
 	 
+	static void reconstitutionDesTache() throws NumberFormatException, RemoteException {
+		Task t = null;
+		String [] decoupeList = listtache.split("T:");
+        for(int i = 1; i<decoupeList.length;i++){
+                System.out.println("t - : " + i);
+                String [] decoupeTask = decoupeList[i].split("/");t = new Task(decoupeTask[0],decoupeTask[1],decoupeTask[2],Integer.parseInt(decoupeTask[3]),decoupeTask[4],decoupeTask[5],decoupeTask[6]);
+                todoList.add(t);
+        }
+
+} 
 }

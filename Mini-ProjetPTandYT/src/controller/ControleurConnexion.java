@@ -54,8 +54,8 @@ public class ControleurConnexion extends Pane{
     	
 		try {
 			ODI o = (ODI)Naming.lookup("//localhost/od");
-			String str = o.getTodolist();
-			System.out.println("list : " + str);
+			ControleurClient.listtache = o.getTodolist();
+			System.out.println("list : " + ControleurClient.listtache);
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

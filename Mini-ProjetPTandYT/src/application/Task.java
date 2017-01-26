@@ -49,6 +49,17 @@ public class Task extends UnicastRemoteObject implements ODI {
 
 	}
 	
+	public Task(String title, String description, String priority, int state , String endDate,  String taskCreator, String taskMaker)throws RemoteException {
+		// TODO Auto-generated constructor stub
+		this.title = title;
+		this.description = description;
+		this.priority = priority;
+		this.state = state;
+		this.endDate = endDate;
+		this.taskCreator = taskCreator;
+		this.taskMaker = taskMaker;
+
+	}
 	public String etatToString(){
 		switch (this.state){
 			case 0 : return "INIT";
@@ -138,7 +149,7 @@ public class Task extends UnicastRemoteObject implements ODI {
 	}
 	
 	public String toString(){
-		return "T:" + getTitle() + "/" + getDescription() + "/" + getPriority() + "/" + getState() + " " + getEndDate() + "/" + getTaskCreator() + "/" + getTaskMaker();
+		return "T:" + getTitle() + "/" + getDescription() + "/" + getPriority() + "/" + getState() + "/" + getEndDate() + "/" + getTaskCreator() + "/" + getTaskMaker();
 	}
 	
 	static XMLEncoder xmle;
@@ -187,7 +198,7 @@ public class Task extends UnicastRemoteObject implements ODI {
 		// TODO Auto-generated method stub
 		
 		
-		Task t = new Task("Balayercc", "Balayer la cour, et jeter les feuilles", "IMPORTANT",1,"Alix", "Pierre");
+		Task t = new Task("Balayer", "Balayer la cour, et jeter les feuilles", "IMPORTANT",1,"Alix", "Pierre");
 		Task t1 = new Task("Astiquer", "Balayer la cour, et jeter les feuilles", "FORTE",0,"Alix", "Alix");
 		Task t2 = new Task("Décharger", "Balayer la cour, et jeter les feuilles", "FAIBLE",2,"Alix", "Yves");
 		
@@ -220,14 +231,16 @@ public class Task extends UnicastRemoteObject implements ODI {
 		}catch(Exception e) {
 			System.out.println("fin");
 			CloseFilleXMLD();
-			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public String getTodolist() throws RemoteException {
 		// TODO Auto-generated method stub
-		return todoList.toString();
+		if(todoList != null)
+			return todoList.toString();
+		else
+			return "VIDE";
 	}
 	
 	public void setTodolist( ArrayList<Task> tl){

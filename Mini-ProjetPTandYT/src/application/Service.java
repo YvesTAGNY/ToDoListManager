@@ -41,16 +41,19 @@ public class Service implements Runnable {
 			System.out.println("fin de recupération des taches");
 			Task.CloseFilleXMLD();
 		}
-		task.setTodolist(todoList);
-
-		try {
-			Registry a = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-			a.rebind("od", task);
-		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		
+		if(todoList != null){
+			task.setTodolist(todoList);
+	
+			try {
+				Registry a = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+				a.rebind("od", task);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-
+		
 		/*
 		 * Communication client seveur
 		 */
