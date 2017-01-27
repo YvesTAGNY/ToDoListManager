@@ -143,6 +143,7 @@ public class ControleurClient implements Initializable {
 	protected void doQuitter(ActionEvent event) throws IOException {
 		System.out.println("doQuitter");
 		 Stage cStage = (Stage)un.getScene().getWindow();
+		 client.clientSendQUITTER();
 		 client.closeClient();
          cStage.close();  
          //System.exit(0);
