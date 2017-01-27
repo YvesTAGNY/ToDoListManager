@@ -32,13 +32,8 @@ private Socket clientSocket = null;
 	    if (clientSocket != null) {
 	      try {
 			OutputStream out = clientSocket.getOutputStream();
-	        
 	        PrintStream pout = new PrintStream(out);
 	        pout.println(userName);
-	        //pout.close();
-	       /* BufferedReader bin = new BufferedReader(new InputStreamReader(in));
-			String msg = bin.readLine();
-			System.out.println("recu : " + msg);*/
 	      } catch (UnknownHostException e) {
 	        System.err.println("Trying to connect to unknown host: " + e);
 	      } catch (IOException e) {
@@ -53,6 +48,17 @@ private Socket clientSocket = null;
         	OutputStream out = clientSocket.getOutputStream();
     		ObjectOutputStream Oout = new ObjectOutputStream(out);
 			Oout.writeObject(t);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void clientSendTask(String str1, String str2, String str3, int str4, String str5, String str6){
+        try {
+        	OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println(str1 + "/" + str2 + "/" + str3 + "/" + str4 + "/" + str5 + "/" + str6);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -199,7 +205,8 @@ private Socket clientSocket = null;
 	      }
 	    }
 	}
-	public void closeClient(){
+	public void closeClien
+	(){
 		try {
 			clientSocket.close();
 		} catch (IOException e) {
