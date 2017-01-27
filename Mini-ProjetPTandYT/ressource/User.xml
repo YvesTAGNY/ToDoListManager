@@ -30,4 +30,29 @@
    <string>dddz</string>
   </void>
  </object>
+ <object class="application.User">
+  <void property="name">
+   <string>dd</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>4</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>5</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>dq</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>qqq</string>
+  </void>
+ </object>
 </java>

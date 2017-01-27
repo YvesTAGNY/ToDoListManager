@@ -32,13 +32,8 @@ private Socket clientSocket = null;
 	    if (clientSocket != null) {
 	      try {
 			OutputStream out = clientSocket.getOutputStream();
-	        
 	        PrintStream pout = new PrintStream(out);
 	        pout.println(userName);
-	        //pout.close();
-	       /* BufferedReader bin = new BufferedReader(new InputStreamReader(in));
-			String msg = bin.readLine();
-			System.out.println("recu : " + msg);*/
 	      } catch (UnknownHostException e) {
 	        System.err.println("Trying to connect to unknown host: " + e);
 	      } catch (IOException e) {
@@ -210,7 +205,8 @@ private Socket clientSocket = null;
 	      }
 	    }
 	}
-	public void closeClient(){
+	public void closeClien
+	(){
 		try {
 			clientSocket.close();
 		} catch (IOException e) {

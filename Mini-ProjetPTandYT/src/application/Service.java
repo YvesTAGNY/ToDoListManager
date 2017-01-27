@@ -41,7 +41,7 @@ public class Service implements Runnable {
 			int decision = 0;
 
 			/*
-			 * Recupération des taches dans le fichier xml
+			 * RecupÃ©ration des taches dans le fichier xml
 			 */
 			Task task = null;
 			try {
@@ -52,7 +52,7 @@ public class Service implements Runnable {
 					System.out.println(" t : " + task.toString());
 				}
 			} catch (Exception e) {
-				System.out.println("fin de recupération des taches");
+				System.out.println("fin de recupÃ©ration des taches");
 				Task.CloseFilleXMLD();
 			}
 			
@@ -83,7 +83,7 @@ public class Service implements Runnable {
 					if (msg != null) {
 						if (!StaxXMLUser.isExist(msg)) {// verification de
 														// l'existance du client
-														// dans les données
+														// dans les donnÃ©es
 							pout.println("YES");
 							decision = 1;
 						} else {
@@ -119,7 +119,7 @@ public class Service implements Runnable {
 				// serialisation du nouveau utilisateur
 				User.initFilleXMLE("./ressource/User.xml");
 
-				// sauvegarde les users deja enregistré
+				// sauvegarde les users deja enregistrÃ©
 				for (User u : User.UserList)
 					User.encodeToFile(u);
 
@@ -172,7 +172,7 @@ public class Service implements Runnable {
 			}
 
 		} catch (IOException e) {
-			System.out.println("client déconnecté");
+			System.out.println("client dÃ©connectÃ©");
 		}
 	}
 
