@@ -205,8 +205,7 @@ private Socket clientSocket = null;
 	      }
 	    }
 	}
-	public void closeClien
-	(){
+	public void closeClient(){
 		try {
 			clientSocket.close();
 		} catch (IOException e) {

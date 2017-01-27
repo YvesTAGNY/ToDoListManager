@@ -52,7 +52,7 @@ public class Service implements Runnable {
 					System.out.println(" t : " + task.toString());
 				}
 			} catch (Exception e) {
-				System.out.println("fin de recupÃ©ration des taches");
+				System.out.println("fin de recupération des taches");
 				Task.CloseFilleXMLD();
 			}
 			
@@ -172,7 +172,7 @@ public class Service implements Runnable {
 			}
 
 		} catch (IOException e) {
-			System.out.println("client dÃ©connectÃ©");
+			System.out.println("client déconnecté");
 		}
 	}
 

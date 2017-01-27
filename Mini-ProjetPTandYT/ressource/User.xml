@@ -55,4 +55,9 @@
    <string>qqq</string>
   </void>
  </object>
+ <object class="application.User">
+  <void property="name">
+   <string>sqs</string>
+  </void>
+ </object>
 </java>

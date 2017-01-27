@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ControleurClient implements Initializable {
 
@@ -136,6 +137,15 @@ public class ControleurClient implements Initializable {
 	@FXML
 	protected void doSupprimer(ActionEvent event) throws IOException {
 		System.out.println("doSupprimer");
+	}
+	
+	@FXML
+	protected void doQuitter(ActionEvent event) throws IOException {
+		System.out.println("doQuitter");
+		 Stage cStage = (Stage)un.getScene().getWindow();
+		 client.closeClient();
+         cStage.close();  
+         //System.exit(0);
 	}
 	 
 	static void reconstitutionDesTache() throws NumberFormatException, RemoteException {
