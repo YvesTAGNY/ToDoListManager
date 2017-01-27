@@ -11,18 +11,18 @@
    <int>1</int>
   </void>
   <void property="taskCreator">
-   <string>qqq</string>
+   <string>Yves</string>
   </void>
   <void property="taskMaker">
-   <string>qqq</string>
+   <string>Yves</string>
   </void>
   <void property="title">
-   <string>q</string>
+   <string>sq</string>
   </void>
  </object>
  <object class="application.Task">
   <void property="description">
-   <string>qs</string>
+   <string>q</string>
   </void>
   <void property="priority">
    <string>q</string>
@@ -31,12 +31,12 @@
    <int>1</int>
   </void>
   <void property="taskCreator">
-   <string>qqq</string>
+   <string>Yves</string>
   </void>
   <void property="taskMaker">
-   <string>qqq</string>
+   <string>Yves</string>
   </void>
   <void property="title">
-   <string>q</string>
+   <string>sq</string>
   </void>
  </object>

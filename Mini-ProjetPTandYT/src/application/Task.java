@@ -8,12 +8,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import controller.ControleurClient;
 
 
-public class Task implements Serializable {
+public class Task extends UnicastRemoteObject implements ODI {
 
 	/**
 	 * 
@@ -24,14 +28,17 @@ public class Task implements Serializable {
 	private String description;
 	private String priority;
 	private int state;
-	private Date endDate;
+	private String endDate;
 	private String taskCreator;
 	private String taskMaker;
 
+	private ArrayList<Task> todoList;
+	public Task tsk;
+	
 	/* getter and Setter */
-	public Task(){}
+	public Task()throws RemoteException {} 
 
-	public Task(String title, String description, String priority, int state ,  String taskCreator, String taskMaker) {
+	public Task(String title, String description, String priority, int state ,  String taskCreator, String taskMaker)throws RemoteException {
 		// TODO Auto-generated constructor stub
 		this.title = title;
 		this.description = description;
@@ -42,6 +49,17 @@ public class Task implements Serializable {
 
 	}
 	
+	public Task(String title, String description, String priority, int state , String endDate,  String taskCreator, String taskMaker)throws RemoteException {
+		// TODO Auto-generated constructor stub
+		this.title = title;
+		this.description = description;
+		this.priority = priority;
+		this.state = state;
+		this.endDate = endDate;
+		this.taskCreator = taskCreator;
+		this.taskMaker = taskMaker;
+
+	}
 	public String etatToString(){
 		switch (this.state){
 			case 0 : return "INIT";
@@ -82,11 +100,11 @@ public class Task implements Serializable {
 		this.state = state;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -108,8 +126,14 @@ public class Task implements Serializable {
 
 	/* Methods */
 
-	private void closeTask() {
-		
+	public void closeTask() {
+		Date aujourdhui = new Date();
+		DateFormat mediumDateFormat = DateFormat.getDateTimeInstance(
+		DateFormat.MEDIUM,DateFormat.MEDIUM);
+		endDate = mediumDateFormat.format(aujourdhui);
+		this.setEndDate(endDate);
+		System.out.println("Date de fin : " +endDate);
+		this.state = 2;
 	}
 
 	private void deleteTask(Task t) {
@@ -125,7 +149,7 @@ public class Task implements Serializable {
 	}
 	
 	public String toString(){
-		return "Tâche : " + getTitle() + " " + getDescription() + " " + getPriority() + " " + getState() + " " + getEndDate() + " " + getTaskCreator() + " " + getTaskMaker();
+		return "T:" + getTitle() + "/" + getDescription() + "/" + getPriority() + "/" + getState() + "/" + getEndDate() + "/" + getTaskCreator() + "/" + getTaskMaker();
 	}
 	
 	static XMLEncoder xmle;
@@ -174,7 +198,7 @@ public class Task implements Serializable {
 		// TODO Auto-generated method stub
 		
 		
-		Task t = new Task("Balayercc", "Balayer la cour, et jeter les feuilles", "IMPORTANT",1,"Alix", "Pierre");
+		Task t = new Task("Balayer", "Balayer la cour, et jeter les feuilles", "IMPORTANT",1,"Alix", "Pierre");
 		Task t1 = new Task("Astiquer", "Balayer la cour, et jeter les feuilles", "FORTE",0,"Alix", "Alix");
 		Task t2 = new Task("Décharger", "Balayer la cour, et jeter les feuilles", "FAIBLE",2,"Alix", "Yves");
 		
@@ -207,7 +231,19 @@ public class Task implements Serializable {
 		}catch(Exception e) {
 			System.out.println("fin");
 			CloseFilleXMLD();
-			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public String getTodolist() throws RemoteException {
+		// TODO Auto-generated method stub
+		if(todoList != null)
+			return todoList.toString();
+		else
+			return "VIDE";
+	}
+	
+	public void setTodolist( ArrayList<Task> tl){
+		todoList = tl;
 	}
 }
