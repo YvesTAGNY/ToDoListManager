@@ -90,7 +90,7 @@ public class ControleurClient implements Initializable {
 		 todoList.add(t);
 		 listeTaches.getItems().add(t.getTitle());
 		 client.clientSendAJOUTER();
-		 client.clientSendTask(t);
+		 client.clientSendTask(titre.getText(),description.getText(),priorite.getText(),Integer.parseInt(etat.getText()), un.getText(),un.getText());
 		 
 	}
 	

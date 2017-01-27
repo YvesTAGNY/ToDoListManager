@@ -101,11 +101,12 @@ public class Service implements Runnable {
 	            		 if(msg != null){
 		            		 switch(msg) {
 		            		 	case "AJOUTER" :{
-		            		 		ObjectInputStream Oint = new ObjectInputStream(in);
-		    			            Task t = (Task) Oint.readObject();
+		            		 		msg = bin.readLine();
+		            		 		String pt[] = msg.split("/");
+		    			            Task t = new Task(pt[0], pt[1], pt[2], Integer.parseInt(pt[3]), pt[4], pt[5]);
 		    						System.out.println("recu : " + t.toString());
 		    						if(t != null)
-		    						Task.encodeToFile(t);
+		    							Task.encodeToFile(t);
 		            		 		break;	
 		            		 	}
 		            		 	case "ATTRIBUER" :{
@@ -129,7 +130,7 @@ public class Service implements Runnable {
 	            	serverService.close();
 	            }
 	            
-			} catch (IOException | ClassNotFoundException e) {
+			} catch (IOException e) {
 				System.out.println("client déconnecté");
 			}
 		}
