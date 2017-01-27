@@ -111,6 +111,21 @@ public class ControleurConnexion extends Pane{
 	    	run = true;
         }
         
+        String accordT = ControleurClient.client.clientRecieveAccord();
+    	if(accordT.equals("FULL")){
+			try {
+				ODI o = (ODI)Naming.lookup("//localhost/od");
+				ControleurClient.listtache = o.getTodolist();
+				System.out.println("list : " + ControleurClient.listtache);
+				ControleurClient.LTisEmty = false;
+			} catch (NotBoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	else
+    		ControleurClient.LTisEmty = true;
+    	
     	//envoi du nom du client pour la vérification
         ControleurClient.client.clientSendOLD();
         ControleurClient.client.clientSendUserName(getText());

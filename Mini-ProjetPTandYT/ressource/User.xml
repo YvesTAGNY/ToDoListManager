@@ -20,4 +20,14 @@
    <string>Yves</string>
   </void>
  </object>
+ <object class="application.User">
+  <void property="name">
+   <string>d</string>
+  </void>
+ </object>
+ <object class="application.User">
+  <void property="name">
+   <string>dddz</string>
+  </void>
+ </object>
 </java>
