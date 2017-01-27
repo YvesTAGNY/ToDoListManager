@@ -25,8 +25,6 @@ public class Service implements Runnable {
 	public void run() {
 		System.out.println("Serveur en marche");
 		ArrayList<Task> todoList = new ArrayList<Task>();
-
-		
 		
 		/*
 		 * Communication client seveur
@@ -52,7 +50,7 @@ public class Service implements Runnable {
 					System.out.println(" t : " + task.toString());
 				}
 			} catch (Exception e) {
-				System.out.println("fin de recupÃ©ration des taches");
+				System.out.println("fin de recupération des taches");
 				Task.CloseFilleXMLD();
 			}
 			
@@ -145,9 +143,9 @@ public class Service implements Runnable {
 								msg = bin.readLine();
 	            		 		String pt[] = msg.split("/");
 	    			            Task t = new Task(pt[0], pt[1], pt[2], Integer.parseInt(pt[3]), pt[4], pt[5]);
-	    						System.out.println("recu : " + t.toString());
-	    						if(t != null)
-	    							Task.encodeToFile(t);
+	    			            todoList.add(t);
+	    			            System.out.println("recu : " + t.toString());
+	    						Task.encodeToFile(t);
 	            		 		break;	
 							}
 							case "ATTRIBUER": {
@@ -162,7 +160,16 @@ public class Service implements Runnable {
 							case "SUPPRIMER": {
 								break;
 							}
-
+							case "QUITTER": {
+								Task.CloseFilleXMLE();
+								Task.initFilleXMLE("./ressource/Task.xml");
+									for(Task t : todoList)
+										Task.encodeToFile(t);
+								Task.CloseFilleXMLE();
+								serverService.close();
+								System.out.println("client déconnecté.");
+								break;
+							}
 						}
 					}
 				}
@@ -172,7 +179,7 @@ public class Service implements Runnable {
 			}
 
 		} catch (IOException e) {
-			System.out.println("client dÃ©connectÃ©");
+			System.out.println("client déconnecté");
 		}
 	}
 

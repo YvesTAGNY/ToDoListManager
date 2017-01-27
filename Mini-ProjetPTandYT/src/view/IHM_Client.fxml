@@ -14,12 +14,12 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="303.0" layoutX="8.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="229.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d5190" height="361.0" layoutX="251.0" layoutY="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="391.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfd4e8" height="41.0" layoutX="8.0" layoutY="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="229.0" />
-      <Button fx:id="ajouter" onAction="#doAjouter" layoutX="75.0" layoutY="325.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="155.0" text="Ajouter" />
-      <Button fx:id="prendre" onAction="#doPrendre" layoutX="460.0" layoutY="278.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="171.0" text="Prendre" />
-      <Button fx:id="attribuer" onAction="#doAttribuer" layoutX="268.0" layoutY="278.0" mnemonicParsing="false" text="Attribuer" />
-      <Button fx:id="supprimer" onAction="#doSupprimer" layoutX="459.0" layoutY="326.0" mnemonicParsing="false" text="Supprimer" />
+      <Button fx:id="ajouter" layoutX="75.0" layoutY="325.0" mnemonicParsing="false" onAction="#doAjouter" prefHeight="33.0" prefWidth="155.0" text="Ajouter" />
+      <Button fx:id="prendre" layoutX="460.0" layoutY="278.0" mnemonicParsing="false" onAction="#doPrendre" prefHeight="33.0" prefWidth="171.0" text="Prendre" />
+      <Button fx:id="attribuer" layoutX="268.0" layoutY="278.0" mnemonicParsing="false" onAction="#doAttribuer" text="Attribuer" />
+      <Button fx:id="supprimer" layoutX="459.0" layoutY="326.0" mnemonicParsing="false" onAction="#doSupprimer" text="Supprimer" />
       <TextField fx:id="nameAU" layoutX="267.0" layoutY="246.0" prefHeight="25.0" prefWidth="163.0" promptText="Nom du client à attribuer" />
-      <Button fx:id="terminer" onAction="#doTerminer" layoutX="268.0" layoutY="326.0" mnemonicParsing="false" text="Terminer" />
+      <Button fx:id="terminer" layoutX="268.0" layoutY="326.0" mnemonicParsing="false" onAction="#doTerminer" text="Terminer" />
       <TextField fx:id="titre" layoutX="75.0" layoutY="140.0" prefHeight="25.0" prefWidth="155.0" />
       <TextField fx:id="description" layoutX="75.0" layoutY="187.0" prefHeight="25.0" prefWidth="155.0" />
       <TextField fx:id="priorite" layoutX="75.0" layoutY="232.0" prefHeight="25.0" prefWidth="155.0" />
@@ -30,7 +30,7 @@
       <Label layoutX="13.0" layoutY="280.0" text="Etat" />
       <Label fx:id="un" layoutX="16.0" layoutY="16.0" text="Nom" textFill="#343436">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Label layoutX="74.0" layoutY="89.0" text="Nouvelle tâche" textFill="#fcf9f9">
@@ -38,7 +38,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="listeTaches" layoutX="347.0" layoutY="52.0" prefHeight="25.0" prefWidth="285.0" >
+      <ComboBox fx:id="listeTaches" layoutX="347.0" layoutY="52.0" prefHeight="25.0" prefWidth="285.0">
 	  </ComboBox>
       <Label layoutX="375.0" layoutY="18.0" text="Gestion des tâches" textFill="#fcf9f9">
          <font>
@@ -84,5 +84,6 @@
       </Label>
       <Line endX="100.0" layoutX="368.0" layoutY="236.0" startX="-100.0" stroke="WHITE" />
       <Line endX="100.0" layoutX="529.0" layoutY="236.0" startX="-100.0" stroke="WHITE" />
+      <Button layoutX="173.0" layoutY="12.0" mnemonicParsing="false" onAction="#doQuitter" prefHeight="33.0" prefWidth="60.0" style="-fx-padding: 5; -fx-background-color: #3e8acc;" text="Quitter" />
    </children>
 </Pane>
