@@ -59,6 +59,17 @@ private Socket clientSocket = null;
 		}
 	}
 	
+	public void clientSendTask(String str1, String str2, String str3, int str4, String str5, String str6){
+        try {
+        	OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println(str1 + "/" + str2 + "/" + str3 + "/" + str4 + "/" + str5 + "/" + str6);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public String clientRecieveAccord(){
 		 try {
 			 InputStream in = clientSocket.getInputStream();

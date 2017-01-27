@@ -108,7 +108,7 @@ public class ControleurClient implements Initializable {
 		 todoList.add(t);
 		 listeTaches.getItems().add(t.getTitle());
 		 client.clientSendAJOUTER();
-		 client.clientSendTask(t);
+		 client.clientSendTask(titre.getText(),description.getText(),priorite.getText(),Integer.parseInt(etat.getText()), un.getText(),un.getText());
 		 
 	}
 	
@@ -143,7 +143,8 @@ public class ControleurClient implements Initializable {
 		String [] decoupeList = listtache.split("T:");
         for(int i = 1; i<decoupeList.length;i++){
                 System.out.println("t - : " + i);
-                String [] decoupeTask = decoupeList[i].split("/");t = new Task(decoupeTask[0],decoupeTask[1],decoupeTask[2],Integer.parseInt(decoupeTask[3]),decoupeTask[4],decoupeTask[5],decoupeTask[6]);
+                String [] decoupeTask = decoupeList[i].split("/");
+                t = new Task(decoupeTask[0],decoupeTask[1],decoupeTask[2],Integer.parseInt(decoupeTask[3]),decoupeTask[4],decoupeTask[5],decoupeTask[6]);
                 todoList.add(t);
         }
 
