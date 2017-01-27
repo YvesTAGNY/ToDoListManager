@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Date;
 
 import controller.ControleurClient;
@@ -24,7 +25,7 @@ public class Task implements Serializable {
 	private String description;
 	private String priority;
 	private int state;
-	private Date endDate;
+	private String endDate;
 	private String taskCreator;
 	private String taskMaker;
 
@@ -82,11 +83,11 @@ public class Task implements Serializable {
 		this.state = state;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -108,8 +109,14 @@ public class Task implements Serializable {
 
 	/* Methods */
 
-	private void closeTask() {
-		
+	public void closeTask() {
+		Date aujourdhui = new Date();
+ 		DateFormat mediumDateFormat = DateFormat.getDateTimeInstance(
+ 		DateFormat.MEDIUM,DateFormat.MEDIUM);
+ 		endDate = mediumDateFormat.format(aujourdhui);
+ 		this.setEndDate(endDate);
+ 		System.out.println("Date de fin : " +endDate);
+ 		this.state = 2;// 2 :tâche terminé
 	}
 
 	private void deleteTask(Task t) {
