@@ -182,7 +182,7 @@ private Socket clientSocket = null;
 	      try {
 			OutputStream out = clientSocket.getOutputStream();
 	        PrintStream pout = new PrintStream(out);
-	        pout.println("NEW");
+	        pout.println("TERMINER");
 	      } catch (UnknownHostException e) {
 	        System.err.println("Trying to connect to unknown host: " + e);
 	      } catch (IOException e) {
@@ -213,6 +213,21 @@ private Socket clientSocket = null;
 			OutputStream out = clientSocket.getOutputStream();
 	        PrintStream pout = new PrintStream(out);
 	        pout.println("QUITTER");
+	      } catch (UnknownHostException e) {
+	        System.err.println("Trying to connect to unknown host: " + e);
+	      } catch (IOException e) {
+	        System.err.println("IOException:  " + e);
+	      }
+	    }
+	}
+	
+	public void clientSendAModifier(String taskTitle, String aModifier){
+		  
+	    if (clientSocket != null) {
+	      try {
+			OutputStream out = clientSocket.getOutputStream();
+	        PrintStream pout = new PrintStream(out);
+	        pout.println(taskTitle + " " + aModifier);
 	      } catch (UnknownHostException e) {
 	        System.err.println("Trying to connect to unknown host: " + e);
 	      } catch (IOException e) {

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_91" class="java.beans.XMLDecoder">
+ <object class="application.Task">
+  <void property="description">
+   <string>Balayer la cour, et jeter les feuilles</string>
+  </void>
+  <void property="priority">
+   <string>IMPORTANT</string>
+  </void>
+  <void property="state">
+   <int>1</int>
+  </void>
+  <void property="taskCreator">
+   <string>Alix</string>
+  </void>
+  <void property="taskMaker">
+   <string>Pierre</string>
+  </void>
+  <void property="title">
+   <string>Balayer</string>
+  </void>
+ </object>
+ <object class="application.Task">
+  <void property="description">
+   <string>Balayer la cour, et jeter les feuilles</string>
+  </void>
+  <void property="priority">
+   <string>FORTE</string>
+  </void>
+  <void property="taskCreator">
+   <string>Alix</string>
+  </void>
+  <void property="taskMaker">
+   <string>Alix</string>
+  </void>
+  <void property="title">
+   <string>Astiquer</string>
+  </void>
+ </object>
+ <object class="application.Task">
+  <void property="description">
+   <string>Balayer la cour, et jeter les feuilles</string>
+  </void>
+  <void property="priority">
+   <string>FAIBLE</string>
+  </void>
+  <void property="state">
+   <int>2</int>
+  </void>
+  <void property="taskCreator">
+   <string>Alix</string>
+  </void>
+  <void property="taskMaker">
+   <string>Yves</string>
+  </void>
+  <void property="title">
+   <string>Décharger</string>
+  </void>
+ </object>
+</java>
