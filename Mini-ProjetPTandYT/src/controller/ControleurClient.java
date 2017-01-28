@@ -15,10 +15,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class ControleurClient implements Initializable {
@@ -116,15 +118,37 @@ public class ControleurClient implements Initializable {
 	@FXML
 	protected void doAttribuer(ActionEvent event) throws IOException {
 		System.out.println("doAttribuer");
+		if (tache.getTaskCreator().equals(un.getText())){
+			client.clientSendATTRIBUER();
+			client.clientSendUserName(nameAU.getText());
+			String accord = client.clientRecieveAccord();
+			if(accord.equals("YES")){
+				tache.setTaskMaker(nameAU.getText());
+				client.clientSendAModifier(tache.getTitle(), nameAU.getText());
+			}
+			else{
+				String str = nameAU.getText();
+				nameAU.setText(null);
+				nameAU.setPromptText("\"" + str + "\" n'est pas enregistré");
+			}
+		}
+		else{
+			Alert dialogE = new Alert(AlertType.ERROR);
+        	dialogE.setTitle("ERREUR");
+        	dialogE.setHeaderText("");
+        	dialogE.setContentText("Vous n'avez pas le droit de attribuer cette tâche, car vous n'êtes pas le createur !");
+        	dialogE.showAndWait();
+		}
 	}
 	
 	@FXML
 	protected void doPrendre(ActionEvent event) throws IOException {
 		System.out.println("doPrendre");
+		client.clientSendPRENDRE();
 		if (tache.getTaskMaker() != un.getText()){
 			tache.setTaskMaker(un.getText());
 		}
-		client.clientSendPRENDRE();
+		client.clientSendAModifier(tache.getTitle(), tache.getTaskMaker());
 	}
 	
 	@FXML
@@ -132,11 +156,25 @@ public class ControleurClient implements Initializable {
 		System.out.println("doTerminer");
 		client.clientSendTERMINER();
 		tache.closeTask();
+		client.clientSendAModifier(tache.getTitle(), ".");
 	}
 	
 	@FXML
 	protected void doSupprimer(ActionEvent event) throws IOException {
 		System.out.println("doSupprimer");
+		if (tache.getTaskCreator().equals(un.getText())){
+			client.clientSendSUPPRIMER();
+			listeTaches.getItems().remove(tache.getTitle());
+			todoList.remove(tache);
+			client.clientSendAModifier(tache.getTitle(), ".");
+		}
+		else{
+			Alert dialogE = new Alert(AlertType.ERROR);
+        	dialogE.setTitle("ERREUR");
+        	dialogE.setHeaderText("");
+        	dialogE.setContentText("Vous n'avez pas le droit de supprimer cette tâche, car vous n'êtes pas le createur !");
+        	dialogE.showAndWait();
+		}
 	}
 	
 	@FXML
