@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Source;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,7 +24,7 @@ import org.xml.sax.SAXException;
 
 public class XMLopTask {
 
-
+	
 	private String filename;
 	public XMLopTask(String filename) {
 		this.filename = filename;
@@ -115,6 +116,7 @@ public class XMLopTask {
 				{
 						 final Element nodedate = document.createElement("date");
 							nodedate.appendChild(document.createTextNode(date));
+							
 					
 					return "date  " + title + " ajouté" ;
 				}
@@ -138,7 +140,10 @@ public class XMLopTask {
 			{
 				Element el = (Element)clientNodes.item(i);
 				if(el.getElementsByTagName("title").item(0).getTextContent().equals(title) && el.getElementsByTagName("taskCreator").item(0).getTextContent().equals(taskCreator)){
-					el.getElementsByTagName("taskMaker").item(0).setTextContent(user);	
+					el.getElementsByTagName("taskMaker").item(0).setTextContent(user);
+					final Element nodetaskMaker = document.createElement("taskMaker");
+				    nodetaskMaker.appendChild(document.createTextNode(user));
+					
 				}
 			}
 	
@@ -155,14 +160,17 @@ public class XMLopTask {
 		final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer;
 		try {
+			
 			transformer = transformerFactory.newTransformer();
-			String fileName = "./ressource/Task.xml";
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			String fileName = "./ressource/test.xml";
 			File file= new File(fileName);
 			file.delete();
+			final DOMSource source =new DOMSource(document);
 			final StreamResult sortie = new StreamResult(new File(filename));
-			final StreamResult source = new StreamResult(file);
-			
-			transformer.transform((Source) source, sortie);
+		
+			transformer.transform(source, sortie);
 			return true;
 		
 		} catch (TransformerException e) {
@@ -172,7 +180,7 @@ public class XMLopTask {
 		}
 	}
 	
-	private ArrayList<Task> GetTaskList()
+	public ArrayList<Task> GetTaskList()
 	{
 		ArrayList<Task> taskl = new ArrayList<>();
 		try {
