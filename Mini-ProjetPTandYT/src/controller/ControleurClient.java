@@ -57,6 +57,8 @@ public class ControleurClient implements Initializable {
 	@FXML private Label etatl;
 	@FXML private Label nameUU;
 	@FXML private Label nameUC;
+	@FXML private Label dateFin;
+	@FXML private Label ld;
 	
 	@FXML private Button ajouter;
 	@FXML private Button attribuer;
@@ -95,6 +97,14 @@ public class ControleurClient implements Initializable {
 			    			etatl.setText(tl.etatToString());
 			    			nameUU.setText(tl.getTaskMaker());
 			    			nameUC.setText(tl.getTaskCreator());
+			    			if(!tl.getEndDate().equals("null")){
+			    				ld.setVisible(true);
+			    				dateFin.setText(tl.getEndDate());
+			    			}
+			    			else{
+			    				dateFin.setText("");
+			    				ld.setVisible(false);
+			    			}
 			    			tache = tl;
 			    		}
 			    	}
@@ -158,6 +168,8 @@ public class ControleurClient implements Initializable {
 			client.clientSendTERMINER();
 			tache.closeTask();
 			client.clientSendAModifier(tache.getTitle(), ".");
+			ld.setVisible(true);
+			dateFin.setText(tache.getEndDate());
 		}else{
 			Alert dialogE = new Alert(AlertType.ERROR);
         	dialogE.setTitle("ERREUR");
@@ -201,7 +213,11 @@ public class ControleurClient implements Initializable {
         for(int i = 1; i<decoupeList.length;i++){
                 System.out.println("t - : " + i);
                 String [] decoupeTask = decoupeList[i].split("/");
-                t = new Task(decoupeTask[0],decoupeTask[1],decoupeTask[2],Integer.parseInt(decoupeTask[3]),decoupeTask[4],decoupeTask[5],decoupeTask[6]);
+                if(i != decoupeList.length-1)
+                	t = new Task(decoupeTask[0],decoupeTask[1],decoupeTask[2],Integer.parseInt(decoupeTask[3]),decoupeTask[4],decoupeTask[5],decoupeTask[6].substring(0,decoupeTask[6].length()-2));
+                else
+                	t = new Task(decoupeTask[0],decoupeTask[1],decoupeTask[2],Integer.parseInt(decoupeTask[3]),decoupeTask[4],decoupeTask[5],decoupeTask[6].substring(0,decoupeTask[6].length()-1));
+                System.out.println("erer :"+t.getTaskMaker());
                 todoList.add(t);
         }
 
