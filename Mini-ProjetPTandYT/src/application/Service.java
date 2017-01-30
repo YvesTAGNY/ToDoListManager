@@ -17,6 +17,10 @@ public class Service implements Runnable {
 
 	private Socket serverService;
 
+	ArrayList<Task> todoList = new ArrayList<Task>();
+	
+	boolean firstConnect = false;
+	
 	Service(Socket s) {
 		serverService = s;
 	}
@@ -24,7 +28,7 @@ public class Service implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("Serveur en marche");
-		ArrayList<Task> todoList = new ArrayList<Task>();
+		
 		
 		/*
 		 * Communication client seveur
@@ -42,17 +46,21 @@ public class Service implements Runnable {
 			 * RecupÃ©ration des taches dans le fichier xml
 			 */
 			Task task = null;
-			try {
-				Task.initFilleXMLD("./ressource/Task.xml");
-
-				while ((task = Task.decodeFromFile()) != null) {
-					todoList.add(task);
-					System.out.println(" tâche : " + task.toString());
+			//if(firstConnect == false){
+				try {
+					Task.initFilleXMLD("./ressource/Task.xml");
+	
+					while ((task = Task.decodeFromFile()) != null) {
+						todoList.add(task);
+						System.out.println(" tâche : " + task.toString());
+					}
+				} catch (Exception e) {
+					System.out.println("fin de recupération des taches");
+					Task.CloseFilleXMLD();
 				}
-			} catch (Exception e) {
-				System.out.println("fin de recupération des taches");
-				Task.CloseFilleXMLD();
-			}
+				//firstConnect = true;
+				saveTask();
+			//}
 			
 			if(!todoList.isEmpty()){
 				pout.println("FULL");
@@ -130,7 +138,6 @@ public class Service implements Runnable {
 			/*
 			 * gestion des fonctions de tache
 			 */
-			Task.initFilleXMLE("./ressource/Task.xml");
 			try {
 				while (true) {
 
@@ -143,7 +150,7 @@ public class Service implements Runnable {
 	    			            Task t = new Task(pt[0], pt[1], pt[2], Integer.parseInt(pt[3]), pt[4], pt[5]);
 	    			            todoList.add(t);
 	    			            System.out.println("nouvelle tâche : " + t.toString());
-	    						Task.encodeToFile(t);
+	    			            saveTask();
 	            		 		break;	
 							}
 							case "ATTRIBUER": {
@@ -183,11 +190,7 @@ public class Service implements Runnable {
 								break;
 							}
 							case "QUITTER": {
-								Task.CloseFilleXMLE();
-								Task.initFilleXMLE("./ressource/Task.xml");
-									for(Task t : todoList)
-										Task.encodeToFile(t);
-								Task.CloseFilleXMLE();
+								saveTask();
 								serverService.close();
 								System.out.println("client déconnecté.");
 								break;
@@ -228,4 +231,14 @@ public class Service implements Runnable {
 		return null;
 	}
 	
+	/*
+	 * sauvegarde de tâches
+	 * */
+	private void saveTask() throws IOException{
+		Task.initFilleXMLE("./ressource/Task.xml");
+		for(Task t : todoList)
+			Task.encodeToFile(t);
+		Task.CloseFilleXMLE();
+		System.out.println("todolist : " + todoList);
+	}
 }
