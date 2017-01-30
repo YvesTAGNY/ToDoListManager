@@ -154,9 +154,17 @@ public class ControleurClient implements Initializable {
 	@FXML
 	protected void doTerminer(ActionEvent event) throws IOException {
 		System.out.println("doTerminer");
-		client.clientSendTERMINER();
-		tache.closeTask();
-		client.clientSendAModifier(tache.getTitle(), ".");
+		if(un.getText().equals(nameUU.getText())){
+			client.clientSendTERMINER();
+			tache.closeTask();
+			client.clientSendAModifier(tache.getTitle(), ".");
+		}else{
+			Alert dialogE = new Alert(AlertType.ERROR);
+        	dialogE.setTitle("ERREUR");
+        	dialogE.setHeaderText("");
+        	dialogE.setContentText("Vous n'avez pas le droit de terminer cette tâche, car vous n'êtes pas le réalisateur !");
+        	dialogE.showAndWait();
+		}
 	}
 	
 	@FXML

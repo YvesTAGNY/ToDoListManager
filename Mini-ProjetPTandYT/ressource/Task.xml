@@ -24,8 +24,14 @@
   <void property="description">
    <string>Balayer la cour, et jeter les feuilles</string>
   </void>
+  <void property="endDate">
+   <string>30 janv. 2017 14:02:54</string>
+  </void>
   <void property="priority">
    <string>FORTE</string>
+  </void>
+  <void property="state">
+   <int>2</int>
   </void>
   <void property="taskCreator">
    <string>Alix</string>
@@ -51,10 +57,30 @@
    <string>Alix</string>
   </void>
   <void property="taskMaker">
-   <string>Yves</string>
+   <string>Max</string>
   </void>
   <void property="title">
    <string>Décharger</string>
+  </void>
+ </object>
+ <object class="application.Task">
+  <void property="description">
+   <string>lire le livre prepa TOEIC 2015</string>
+  </void>
+  <void property="priority">
+   <string>FORTE</string>
+  </void>
+  <void property="state">
+   <int>1</int>
+  </void>
+  <void property="taskCreator">
+   <string>Max</string>
+  </void>
+  <void property="taskMaker">
+   <string>Alix</string>
+  </void>
+  <void property="title">
+   <string>lire</string>
   </void>
  </object>
 </java>
