@@ -169,6 +169,7 @@ public class Service implements Runnable {
 							String pt[] = msg.split(" ");
 							System.out.println("Modification a faire, " + pt[1] + " prend de la tâche : " + pt[0]);
 							indexTask(todoList, pt[0]).setTaskMaker(pt[1]);
+							saveTask();
 							break;
 						}
 						case "TERMINER": {
@@ -176,6 +177,7 @@ public class Service implements Runnable {
 							String pt[] = msg.split(" ");
 							System.out.println("Modification a faire, la tâche : " + pt[0] + " est terminer");
 							indexTask(todoList, pt[0]).closeTask();
+							saveTask();
 							break;
 						}
 						case "SUPPRIMER": {
@@ -183,6 +185,7 @@ public class Service implements Runnable {
 							String pt[] = msg.split(" ");
 							System.out.println("Modification a faire, la tâche : " + pt[0] + " est supprimer");
 							todoList.remove(indexTask(todoList, pt[0]));
+							saveTask();
 							break;
 						}
 						case "ACTUALISER": {
@@ -261,7 +264,7 @@ public class Service implements Runnable {
 				todoList.add(task);
 			}
 		} catch (Exception e) {
-			System.out.println("fin de recupération des taches");
+			System.out.println("recupération  terminé");
 			Task.CloseFilleXMLD();
 		}
 		return todoList;

@@ -59,47 +59,7 @@
  </object>
  <object class="application.Task">
   <void property="description">
-   <string>TOEIC </string>
-  </void>
-  <void property="priority">
-   <string>FORTE</string>
-  </void>
-  <void property="state">
-   <int>1</int>
-  </void>
-  <void property="taskCreator">
-   <string>Alix</string>
-  </void>
-  <void property="taskMaker">
-   <string>Alix</string>
-  </void>
-  <void property="title">
-   <string>lire</string>
-  </void>
- </object>
- <object class="application.Task">
-  <void property="description">
-   <string>MHD</string>
-  </void>
-  <void property="priority">
-   <string>FORT</string>
-  </void>
-  <void property="state">
-   <int>1</int>
-  </void>
-  <void property="taskCreator">
-   <string>Pierre</string>
-  </void>
-  <void property="taskMaker">
-   <string>Pierre</string>
-  </void>
-  <void property="title">
-   <string>ecouter</string>
-  </void>
- </object>
- <object class="application.Task">
-  <void property="description">
-   <string>potato</string>
+   <string>Ravioli</string>
   </void>
   <void property="priority">
    <string>TRES IMPORTANTE</string>
@@ -111,7 +71,7 @@
    <string>Pierre</string>
   </void>
   <void property="taskMaker">
-   <string>Pierre</string>
+   <string>Max</string>
   </void>
   <void property="title">
    <string>manger</string>
