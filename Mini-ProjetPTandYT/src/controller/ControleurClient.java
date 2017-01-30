@@ -135,6 +135,7 @@ public class ControleurClient implements Initializable {
 			if(accord.equals("YES")){
 				tache.setTaskMaker(nameAU.getText());
 				client.clientSendAModifier(tache.getTitle(), nameAU.getText());
+				nameUU.setText(nameAU.getText());
 			}
 			else{
 				String str = nameAU.getText();
@@ -159,6 +160,7 @@ public class ControleurClient implements Initializable {
 			tache.setTaskMaker(un.getText());
 		}
 		client.clientSendAModifier(tache.getTitle(), tache.getTaskMaker());
+		nameUU.setText(un.getText());
 	}
 	
 	@FXML
@@ -198,6 +200,18 @@ public class ControleurClient implements Initializable {
 	}
 	
 	@FXML
+	protected void doActualiser(ActionEvent event) throws IOException {
+		System.out.println("doActualiser");
+		 client.clientSendACTUALISER();
+		 listtache = client.clientRecieveAccord(); 
+		 todoList.removeAll(todoList);
+		 reconstitutionDesTache();
+		 listeTaches.getItems().removeAll( listeTaches.getItems());
+		 for(Task t : todoList)
+			 listeTaches.getItems().add(t.getTitle());
+	}
+	
+	@FXML
 	protected void doQuitter(ActionEvent event) throws IOException {
 		System.out.println("doQuitter");
 		 Stage cStage = (Stage)un.getScene().getWindow();
@@ -217,7 +231,7 @@ public class ControleurClient implements Initializable {
                 	t = new Task(decoupeTask[0],decoupeTask[1],decoupeTask[2],Integer.parseInt(decoupeTask[3]),decoupeTask[4],decoupeTask[5],decoupeTask[6].substring(0,decoupeTask[6].length()-2));
                 else
                 	t = new Task(decoupeTask[0],decoupeTask[1],decoupeTask[2],Integer.parseInt(decoupeTask[3]),decoupeTask[4],decoupeTask[5],decoupeTask[6].substring(0,decoupeTask[6].length()-1));
-                System.out.println("erer :"+t.getTaskMaker());
+              
                 todoList.add(t);
         }
 

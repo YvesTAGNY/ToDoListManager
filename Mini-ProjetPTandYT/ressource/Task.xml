@@ -77,4 +77,44 @@
    <string>lire</string>
   </void>
  </object>
+ <object class="application.Task">
+  <void property="description">
+   <string>MHD</string>
+  </void>
+  <void property="priority">
+   <string>FORT</string>
+  </void>
+  <void property="state">
+   <int>1</int>
+  </void>
+  <void property="taskCreator">
+   <string>Pierre</string>
+  </void>
+  <void property="taskMaker">
+   <string>Pierre</string>
+  </void>
+  <void property="title">
+   <string>ecouter</string>
+  </void>
+ </object>
+ <object class="application.Task">
+  <void property="description">
+   <string>potato</string>
+  </void>
+  <void property="priority">
+   <string>TRES IMPORTANTE</string>
+  </void>
+  <void property="state">
+   <int>1</int>
+  </void>
+  <void property="taskCreator">
+   <string>Pierre</string>
+  </void>
+  <void property="taskMaker">
+   <string>Pierre</string>
+  </void>
+  <void property="title">
+   <string>manger</string>
+  </void>
+ </object>
 </java>

@@ -18,9 +18,7 @@ public class Service implements Runnable {
 	private Socket serverService;
 
 	ArrayList<Task> todoList = new ArrayList<Task>();
-	
-	boolean firstConnect = false;
-	
+
 	Service(Socket s) {
 		serverService = s;
 	}
@@ -28,8 +26,7 @@ public class Service implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("Serveur en marche");
-		
-		
+
 		/*
 		 * Communication client seveur
 		 */
@@ -46,26 +43,24 @@ public class Service implements Runnable {
 			 * RecupÃ©ration des taches dans le fichier xml
 			 */
 			Task task = null;
-			//if(firstConnect == false){
-				try {
-					Task.initFilleXMLD("./ressource/Task.xml");
-	
-					while ((task = Task.decodeFromFile()) != null) {
-						todoList.add(task);
-						System.out.println(" tâche : " + task.toString());
-					}
-				} catch (Exception e) {
-					System.out.println("fin de recupération des taches");
-					Task.CloseFilleXMLD();
+			try {
+				Task.initFilleXMLD("./ressource/Task.xml");
+
+				while ((task = Task.decodeFromFile()) != null) {
+					todoList.add(task);
+					System.out.println(" tâche : " + task.toString());
 				}
-				//firstConnect = true;
-				saveTask();
-			//}
-			
-			if(!todoList.isEmpty()){
+			} catch (Exception e) {
+				System.out.println("fin de recupération des taches");
+				Task.CloseFilleXMLD();
+			}
+
+			saveTask();
+
+			if (!todoList.isEmpty()) {
 				pout.println("FULL");
 				task.setTodolist(todoList);
-		
+
 				try {
 					Registry a = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 					a.rebind("od", task);
@@ -73,10 +68,9 @@ public class Service implements Runnable {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-			else
+			} else
 				pout.println("VOID");
-			
+
 			/*
 			 * gestion de l'inscription et de la connection
 			 */
@@ -87,7 +81,9 @@ public class Service implements Runnable {
 				case "NEW": {
 					msg = bin.readLine();
 					if (msg != null) {
-						if (!StaxXMLUser.isExist(msg)) {// verification de l'existance du client dans les données
+						if (!StaxXMLUser.isExist(msg)) {// verification de
+														// l'existance du client
+														// dans les données
 							pout.println("YES");
 							decision = 1;
 						} else {
@@ -144,57 +140,67 @@ public class Service implements Runnable {
 					msg = bin.readLine();
 					if (msg != null) {
 						switch (msg) {
-							case "AJOUTER": {
+						case "AJOUTER": {
+							msg = bin.readLine();
+							String pt[] = msg.split("/");
+							Task t = new Task(pt[0], pt[1], pt[2], Integer.parseInt(pt[3]), pt[4], pt[5]);
+							todoList.add(t);
+							System.out.println("nouvelle tâche : " + t.toString());
+							saveTask();
+							break;
+						}
+						case "ATTRIBUER": {
+							msg = bin.readLine();
+							if (!StaxXMLUser.isExist(msg)) {
+								pout.println("NO");
+								System.out.println(msg + " n'est pas enregistré");
+							} else {
+								pout.println("YES");
 								msg = bin.readLine();
-	            		 		String pt[] = msg.split("/");
-	    			            Task t = new Task(pt[0], pt[1], pt[2], Integer.parseInt(pt[3]), pt[4], pt[5]);
-	    			            todoList.add(t);
-	    			            System.out.println("nouvelle tâche : " + t.toString());
-	    			            saveTask();
-	            		 		break;	
+								String pt[] = msg.split(" ");
+								System.out.println(
+										"Modification a faire, attribution de la tâche : " + pt[0] + " à " + pt[1]);
+								indexTask(todoList, pt[0]).setTaskMaker(pt[1]);
 							}
-							case "ATTRIBUER": {
-								msg = bin.readLine();
-								if (!StaxXMLUser.isExist(msg)){
-									pout.println("NO");
-									System.out.println(msg + " n'est pas enregistré");
-								}
-								else{
-									pout.println("YES");
-									msg = bin.readLine();
-									String pt[] = msg.split(" ");
-		            		 		System.out.println("Modification a faire, attribution de la tâche : " + pt[0] + " à " + pt[1] );
-		            		 		indexTask(todoList, pt[0]).setTaskMaker(pt[1]);
-								}
-								break;
-							}
-							case "PRENDRE": {
-								msg = bin.readLine();
-	            		 		String pt[] = msg.split(" ");
-	            		 		System.out.println("Modification a faire, " + pt[1] + " prend de la tâche : " + pt[0]);
-	            		 		indexTask(todoList, pt[0]).setTaskMaker(pt[1]);
-								break;
-							}
-							case "TERMINER": {
-								msg = bin.readLine();
-	            		 		String pt[] = msg.split(" ");
-	            		 		System.out.println("Modification a faire, la tâche : " + pt[0] + " est terminer" );
-	            		 		indexTask(todoList, pt[0]).closeTask();
-								break;
-							}
-							case "SUPPRIMER": {
-								msg = bin.readLine();
-	            		 		String pt[] = msg.split(" ");
-	            		 		System.out.println("Modification a faire, la tâche : " + pt[0] + " est supprimer" );
-	            		 		todoList.remove(indexTask(todoList, pt[0]));
-								break;
-							}
-							case "QUITTER": {
-								saveTask();
-								serverService.close();
-								System.out.println("client déconnecté.");
-								break;
-							}
+							break;
+						}
+						case "PRENDRE": {
+							msg = bin.readLine();
+							String pt[] = msg.split(" ");
+							System.out.println("Modification a faire, " + pt[1] + " prend de la tâche : " + pt[0]);
+							indexTask(todoList, pt[0]).setTaskMaker(pt[1]);
+							break;
+						}
+						case "TERMINER": {
+							msg = bin.readLine();
+							String pt[] = msg.split(" ");
+							System.out.println("Modification a faire, la tâche : " + pt[0] + " est terminer");
+							indexTask(todoList, pt[0]).closeTask();
+							break;
+						}
+						case "SUPPRIMER": {
+							msg = bin.readLine();
+							String pt[] = msg.split(" ");
+							System.out.println("Modification a faire, la tâche : " + pt[0] + " est supprimer");
+							todoList.remove(indexTask(todoList, pt[0]));
+							break;
+						}
+						case "ACTUALISER": {
+							ArrayList<Task> tl = updateTask();
+							todoList.removeAll(todoList);
+							todoList = tl;
+							String stl = todoList.toString();
+							System.out.println("Mise à jour " + stl);
+							pout.println(stl);
+							saveTask();
+							break;
+						}
+						case "QUITTER": {
+							saveTask();
+							serverService.close();
+							System.out.println("client déconnecté.");
+							break;
+						}
 						}
 					}
 				}
@@ -207,7 +213,7 @@ public class Service implements Runnable {
 			Task.CloseFilleXMLE();
 			try {
 				Task.initFilleXMLE("./ressource/Task.xml");
-				for(Task t : todoList)
+				for (Task t : todoList)
 					Task.encodeToFile(t);
 				Task.CloseFilleXMLE();
 				serverService.close();
@@ -218,27 +224,46 @@ public class Service implements Runnable {
 			System.out.println("client déconnecté");
 		}
 	}
-	
+
 	/*
 	 * recupérer la tâche à modifier
-	 * */
-	private Task indexTask(ArrayList<Task> todoList, String taskTitle){
-		for(Task tl : todoList){
-    		if(tl.getTitle().equals(taskTitle)){
-    			return tl;
-    		}
+	 */
+	private Task indexTask(ArrayList<Task> todoList, String taskTitle) {
+		for (Task tl : todoList) {
+			if (tl.getTitle().equals(taskTitle)) {
+				return tl;
+			}
 		}
 		return null;
 	}
-	
+
 	/*
 	 * sauvegarde de tâches
-	 * */
-	private void saveTask() throws IOException{
+	 */
+	private void saveTask() throws IOException {
 		Task.initFilleXMLE("./ressource/Task.xml");
-		for(Task t : todoList)
+		for (Task t : todoList)
 			Task.encodeToFile(t);
 		Task.CloseFilleXMLE();
 		System.out.println("todolist : " + todoList);
+	}
+
+	/*
+	 * recupération de tâches
+	 */
+	private ArrayList<Task> updateTask() throws IOException {
+		ArrayList<Task> todoList = new ArrayList<Task>();
+		Task task = null;
+		try {
+			Task.initFilleXMLD("./ressource/Task.xml");
+
+			while ((task = Task.decodeFromFile()) != null) {
+				todoList.add(task);
+			}
+		} catch (Exception e) {
+			System.out.println("fin de recupération des taches");
+			Task.CloseFilleXMLD();
+		}
+		return todoList;
 	}
 }
