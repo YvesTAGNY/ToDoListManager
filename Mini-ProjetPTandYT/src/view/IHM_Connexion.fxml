@@ -5,14 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="700.0" stylesheets="@Styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.ControleurConnexion">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="700.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControleurConnexion">
    <children>
       <Label layoutX="55.0" layoutY="26.0" prefHeight="17.0" prefWidth="67.0" text="Bienvenue !" />
-      <Label layoutX="55.0" layoutY="51.0" prefHeight="17.0" prefWidth="334.0" text="Déjà client ? Connecté vous ! Nouveau ? Inscrivé vous !" />
+      <Label layoutX="55.0" layoutY="51.0" prefHeight="17.0" prefWidth="334.0" text="Déjà client ? Connecté vous ! Nouveau ? Inscrivez vous !" />
       <TextField fx:id="nameUser" layoutX="55.0" layoutY="100.0" prefHeight="25.0" prefWidth="262.0" />
-      <Button fx:id="connexion" layoutX="330.0" layoutY="96.0" mnemonicParsing="false"  onAction="#doConnexion" text="Connexion" />
-      <Button fx:id="inscription" layoutX="514.0" layoutY="96.0" mnemonicParsing="false" onAction="#doInscription" text="Inscription" />
+      <Button fx:id="connexion" layoutX="330.0" layoutY="96.0" mnemonicParsing="false" onAction="#doConnexion" prefHeight="33.0" prefWidth="169.0" text="Connexion" />
+      <Button fx:id="inscription" layoutX="514.0" layoutY="96.0" mnemonicParsing="false" onAction="#doInscription" prefHeight="33.0" prefWidth="169.0" text="Inscription" />
       <Label layoutX="55.0" layoutY="75.0" text="Entrez votre nom :" />
    </children>
 </AnchorPane>

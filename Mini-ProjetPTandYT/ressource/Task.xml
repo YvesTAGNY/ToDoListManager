@@ -24,14 +24,20 @@
   <void property="description">
    <string>Balayer la cour, et jeter les feuilles</string>
   </void>
+  <void property="endDate">
+   <string>31 janv. 2017 14:17:20</string>
+  </void>
   <void property="priority">
    <string>FORTE</string>
+  </void>
+  <void property="state">
+   <int>2</int>
   </void>
   <void property="taskCreator">
    <string>Alix</string>
   </void>
   <void property="taskMaker">
-   <string>Alix</string>
+   <string>Max</string>
   </void>
   <void property="title">
    <string>Astiquer</string>
