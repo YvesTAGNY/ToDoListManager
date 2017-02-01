@@ -25,9 +25,4 @@
    <string>Max</string>
   </void>
  </object>
- <object class="application.User">
-  <void property="name">
-   <string>Julle</string>
-  </void>
- </object>
 </java>

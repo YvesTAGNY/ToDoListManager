@@ -57,24 +57,4 @@
    <string>Décharger</string>
   </void>
  </object>
- <object class="application.Task">
-  <void property="description">
-   <string>Ravioli</string>
-  </void>
-  <void property="priority">
-   <string>TRES IMPORTANTE</string>
-  </void>
-  <void property="state">
-   <int>1</int>
-  </void>
-  <void property="taskCreator">
-   <string>Pierre</string>
-  </void>
-  <void property="taskMaker">
-   <string>Max</string>
-  </void>
-  <void property="title">
-   <string>manger</string>
-  </void>
- </object>
 </java>
